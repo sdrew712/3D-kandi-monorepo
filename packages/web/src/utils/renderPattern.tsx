@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as THREE from "three";
 import Square from "@/app/Square";
-import { Pattern } from "@/types";
+import { Pattern } from "../../../core/src/types";
 import { handleMouseMove } from "@/utils/handleMouseMove";
 import { useAddPatternSquare } from "@/utils/useAddPatternSquare";
 import { changeColor } from "@/utils/changeColor";

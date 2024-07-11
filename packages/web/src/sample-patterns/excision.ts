@@ -1,4 +1,4 @@
-import { Pattern } from "@/types";
+import { Pattern } from "../../../core/src/types";
 
 export const Excision: Pattern = [
   {

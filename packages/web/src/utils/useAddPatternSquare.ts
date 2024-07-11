@@ -1,4 +1,4 @@
-import { Pattern } from "@/types";
+import { Pattern } from "../../../core/src/types";
 export function useAddPatternSquare({ pattern }: { pattern: Pattern }) {
   function addPatternSquare({
     coordinates,
