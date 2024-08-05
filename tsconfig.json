@@ -1,8 +1,11 @@
 {
   "extends": "@tsconfig/node18/tsconfig.json",
   "exclude": ["packages"],
+
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }

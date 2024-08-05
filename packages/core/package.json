@@ -1,7 +1,6 @@
 {
   "name": "@3d-kandi-site-monorepo/core",
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit"

@@ -19,3 +19,10 @@ Then, run the development server:
 ```bash
 pnpm dev
 ```
+
+Run the graphql server:
+
+```bash
+cd packagers/core/graphql
+ts-node index.ts
+```
