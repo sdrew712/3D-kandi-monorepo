@@ -23,6 +23,13 @@ pnpm dev
 Run the graphql server:
 
 ```bash
-cd packagers/core/graphql
+cd packages/core/graphql
 ts-node index.ts
+```
+
+Run the web server:
+
+```bash
+cd cd packages/web/
+pnpm devs
 ```
