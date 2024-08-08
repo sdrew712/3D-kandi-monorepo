@@ -22,7 +22,7 @@ export function renderPattern(pattern: Pattern) {
 
   let shouldDisplayPositionSquare = true;
 
-  pattern.forEach((plane) => {
+  pattern.planes.forEach((plane) => {
     if (
       plane.beads.some(
         (bead) => bead.x === mousePosition.x && bead.y === mousePosition.y
@@ -34,7 +34,7 @@ export function renderPattern(pattern: Pattern) {
 
   return (
     <mesh
-      layers={pattern.length}
+      layers={pattern.planes.length}
       onPointerMove={(e) => handleMouseMove({ e, setMousePosition })}
       onClick={() => {
         addPatternSquare({
@@ -43,7 +43,7 @@ export function renderPattern(pattern: Pattern) {
         });
       }}
     >
-      {pattern.map((plane) =>
+      {pattern.planes.map((plane) =>
         plane.beads.map((bead) => {
           if (!shouldDisplayPositionSquare) {
             if (bead.x === mousePosition.x && bead.y === mousePosition.y) {

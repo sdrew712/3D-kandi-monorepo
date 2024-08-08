@@ -13,7 +13,7 @@ export function useAddPatternSquare({ pattern }: { pattern: Pattern }) {
       coordinates.z === null
     )
       return;
-    pattern[0].beads.push({
+    pattern.planes[0].beads.push({
       x: coordinates.x,
       y: coordinates.y,
       z: coordinates.z,
