@@ -6,7 +6,8 @@
     "dev": "sst bind next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "@react-three/drei": "^9.99.3",
@@ -14,7 +15,9 @@
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "three": "^0.161.0"
+    "three": "^0.161.0",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.3.3"
   },
   "devDependencies": {
     "@types/node": "^20",
