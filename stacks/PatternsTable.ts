@@ -7,7 +7,7 @@ export function PatternsTable({ stack }: StackContext) {
       patternId: "string",
       planes: "string",
     },
-    primaryIndex: { partitionKey: "userId", sortKey: "patternId" },
+    primaryIndex: { partitionKey: "patternId", sortKey: "userId" },
   });
 
   return {
