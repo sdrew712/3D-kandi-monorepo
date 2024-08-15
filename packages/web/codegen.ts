@@ -1,6 +1,7 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
 //todo: manage envs properly
+// https://docs.sst.dev/config#define-a-secret
 const SCHEMA_URL = "http://localhost:4000";
 
 const config: CodegenConfig = {

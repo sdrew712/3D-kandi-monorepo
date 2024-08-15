@@ -1,5 +1,5 @@
 export type DBPattern = {
-  userId: string;
   patternId: string;
+  userId: string;
   planes: string;
 };

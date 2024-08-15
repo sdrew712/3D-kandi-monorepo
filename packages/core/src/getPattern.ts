@@ -1,73 +1,59 @@
 import { DBPattern } from "./dbTypes";
 import { Pattern } from "./types";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
 
-export function getPattern({ id }: { id: string }): Pattern {
-  return {
-    id,
-    userId: "sample-userId",
-    planes: [
-      {
-        beads: [
-          { x: 0, y: 0, color: "#5e6360" },
-          { x: 2, y: 0, color: "#5e6360" },
-          { x: 4, y: -2, color: "#5e6360" },
-          { x: 6, y: -4, color: "#5e6360" },
-          { x: 8, y: -2, color: "#5e6360" },
-          { x: 10, y: 0, color: "#5e6360" },
-          { x: 12, y: 0, color: "#5e6360" },
-          { x: 12, y: -2, color: "#5e6360" },
-          { x: 12, y: -4, color: "#5e6360" },
-          { x: 10, y: -6, color: "#5e6360" },
-          { x: 8, y: -8, color: "#5e6360" },
-          { x: 10, y: -10, color: "#5e6360" },
-          { x: 12, y: -12, color: "#5e6360" },
-          { x: 12, y: -14, color: "#5e6360" },
-          { x: 12, y: -16, color: "#5e6360" },
-          { x: 10, y: -18, color: "#5e6360" },
-          { x: 8, y: -20, color: "#5e6360" },
-          { x: 8, y: -18, color: "#5e6360" },
-          { x: 8, y: -16, color: "#5e6360" },
-          { x: 8, y: -14, color: "#5e6360" },
-          { x: 6, y: -12, color: "#5e6360" },
-          { x: 4, y: -14, color: "#5e6360" },
-          { x: 4, y: -16, color: "#5e6360" },
-          { x: 4, y: -18, color: "#5e6360" },
-          { x: 4, y: -20, color: "#5e6360" },
-          { x: 4, y: -22, color: "#5e6360" },
-          { x: 2, y: -20, color: "#5e6360" },
-          { x: 0, y: -18, color: "#5e6360" },
-          { x: 0, y: -16, color: "#5e6360" },
-          { x: 0, y: -14, color: "#5e6360" },
-          { x: 0, y: -12, color: "#5e6360" },
-          { x: 2, y: -10, color: "#5e6360" },
-          { x: 4, y: -8, color: "#5e6360" },
-          { x: 2, y: -6, color: "#5e6360" },
-          { x: 0, y: -4, color: "#5e6360" },
-          { x: 0, y: -2, color: "#5e6360" },
-          { x: 2, y: -2, color: "#e31345" },
-          { x: 4, y: -4, color: "#e31345" },
-          { x: 6, y: -6, color: "#e31345" },
-          { x: 8, y: -4, color: "#e31345" },
-          { x: 10, y: -2, color: "#e31345" },
-          { x: 10, y: -4, color: "#e31345" },
-          { x: 8, y: -6, color: "#e31345" },
-          { x: 6, y: -8, color: "#e31345" },
-          { x: 8, y: -10, color: "#e31345" },
-          { x: 10, y: -12, color: "#e31345" },
-          { x: 10, y: -14, color: "#e31345" },
-          { x: 10, y: -16, color: "#e31345" },
-          { x: 8, y: -12, color: "#e31345" },
-          { x: 6, y: -10, color: "#e31345" },
-          { x: 4, y: -12, color: "#e31345" },
-          { x: 2, y: -14, color: "#e31345" },
-          { x: 2, y: -16, color: "#e31345" },
-          { x: 2, y: -18, color: "#e31345" },
-          { x: 2, y: -12, color: "#e31345" },
-          { x: 4, y: -10, color: "#e31345" },
-          { x: 4, y: -6, color: "#e31345" },
-          { x: 2, y: -4, color: "#e31345" },
-        ],
+export async function getPattern({
+  id,
+}: {
+  id: string;
+}): Promise<Pattern | undefined> {
+  //TODO: ENV VARIABLES
+
+  //todo: fix type
+  const dynamoDb = DynamoDBDocument.from(
+    new DynamoDB({
+      credentials,
+    }),
+    {
+      marshallOptions: {
+        convertEmptyValues: false,
+        removeUndefinedValues: true,
+        convertClassInstanceToMap: true,
       },
-    ],
+    }
+  );
+
+  try {
+    const results = await dynamoDb.get({
+      //todo: get table name from env
+      TableName: ""
+      Key: {
+        patternId: id,
+        //todo: get userId from auth
+        userId: ""
+      },
+    });
+
+    const DBPattern = results.Item as unknown as DBPattern;
+
+    const pattern = mapDBPatternToPattern({
+      DBPattern,
+    });
+    return pattern;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function mapDBPatternToPattern({
+  DBPattern,
+}: {
+  DBPattern: DBPattern;
+}): Pattern {
+  return {
+    id: DBPattern.patternId,
+    userId: DBPattern.userId,
+    planes: JSON.parse(DBPattern.planes),
   };
 }
