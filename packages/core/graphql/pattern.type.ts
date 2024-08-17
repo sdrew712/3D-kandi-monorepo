@@ -12,7 +12,7 @@ class Bead {
   @Field((type) => Int, { nullable: true })
   z?: number;
 
-  @Field()
+  @Field((type) => String)
   color: string;
 }
 
@@ -27,7 +27,7 @@ export class Pattern {
   @Field((type) => ID)
   id: string;
 
-  @Field()
+  @Field((type) => String)
   userId: string;
 
   @Field((type) => [Plane])
