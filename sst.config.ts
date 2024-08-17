@@ -1,5 +1,6 @@
 import { SSTConfig } from "sst";
 import { PatternsTable } from "./stacks/PatternsTable";
+import { GraphQL } from "./stacks/GraphQL";
 
 export default {
   config(_input) {
@@ -10,5 +11,6 @@ export default {
   },
   stacks(app) {
     app.stack(PatternsTable);
+    app.stack(GraphQL);
   },
 } satisfies SSTConfig;

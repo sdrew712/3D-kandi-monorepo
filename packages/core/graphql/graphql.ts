@@ -1,12 +1,11 @@
 import "reflect-metadata";
 import path from "node:path";
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
 import { buildSchema } from "type-graphql";
 import { type Context } from "./context.type";
 import { PatternResolver } from "./pattern.resolver";
 
-async function bootstrap() {
+export async function main() {
   const schema = await buildSchema({
     resolvers: [PatternResolver],
     emitSchemaFile: path.resolve(__dirname, "schema.graphql"),
@@ -14,17 +13,7 @@ async function bootstrap() {
 
   const server = new ApolloServer<Context>({ schema });
 
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
-    context: async () => ({
-      user: {
-        id: 1,
-        name: "Sample user",
-        roles: ["REGULAR"],
-      },
-    }),
-  });
-  console.log(`GraphQL server ready at ${url}`);
+  server.start();
 }
 
-bootstrap().catch(console.error);
+export const handler = main();
