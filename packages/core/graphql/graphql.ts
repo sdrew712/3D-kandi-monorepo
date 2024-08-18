@@ -1,19 +1,28 @@
+import {
+  handlers,
+  startServerAndCreateLambdaHandler,
+} from "@as-integrations/aws-lambda";
 import "reflect-metadata";
-import path from "node:path";
 import { ApolloServer } from "@apollo/server";
 import { buildSchema } from "type-graphql";
 import { type Context } from "./context.type";
 import { PatternResolver } from "./pattern.resolver";
 
-export async function main() {
+export async function handler() {
   const schema = await buildSchema({
     resolvers: [PatternResolver],
-    emitSchemaFile: path.resolve(__dirname, "schema.graphql"),
+    emitSchemaFile: "packages/core/graphql/schema.graphql",
   });
 
-  const server = new ApolloServer<Context>({ schema });
+  const server = new ApolloServer({
+    schema,
+    introspection: true,
+  });
 
-  server.start();
+  const lambdaHandler = startServerAndCreateLambdaHandler(
+    server,
+    handlers.createAPIGatewayProxyEventV2RequestHandler()
+  );
+
+  return lambdaHandler;
 }
-
-export const handler = main();

@@ -36,6 +36,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@as-integrations/aws-lambda':
+        specifier: ^3.1.0
+        version: 3.1.0(@apollo/server@4.10.4)
       '@aws-sdk/client-dynamodb':
         specifier: ^3.33.0
         version: 3.33.0
@@ -552,6 +555,16 @@ packages:
       node-fetch: 2.7.0
     transitivePeerDependencies:
       - encoding
+    dev: false
+
+  /@as-integrations/aws-lambda@3.1.0(@apollo/server@4.10.4):
+    resolution: {integrity: sha512-V7H9ICXgt5KDKfEjYSRB59lEVfQqi7oSIZEeBGzPrmfhSPIHyFCNJyHi1hXdJmRb6GHpCNmtffmqRgsB0i9k3w==}
+    engines: {node: '>=16.0'}
+    peerDependencies:
+      '@apollo/server': ^4.0.0
+    dependencies:
+      '@apollo/server': 4.10.4(graphql@16.9.0)
+      '@types/aws-lambda': 8.10.140
     dev: false
 
   /@aws-cdk/asset-awscli-v1@2.2.202:

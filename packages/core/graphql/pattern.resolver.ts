@@ -1,22 +1,15 @@
-import {
-  Authorized,
-  Resolver,
-  Field,
-  Float,
-  Int,
-  ID,
-  Query,
-  ObjectType,
-  Arg,
-} from "type-graphql";
 import "reflect-metadata";
+import { ID, Authorized, Resolver, Query, Arg } from "type-graphql";
 import { Pattern } from "./pattern.type";
 import { getPattern } from "../src/getPattern";
 
-@Resolver(Pattern)
+@Resolver()
 export class PatternResolver {
   @Query((_returns) => Pattern)
-  async pattern(@Arg("id") id: string): Promise<Pattern> {
+  async pattern(
+    @Arg("id", (_type) => ID, { nullable: false })
+    id: string
+  ) {
     return getPattern({ id });
   }
 }
