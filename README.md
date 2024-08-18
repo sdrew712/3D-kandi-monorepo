@@ -33,3 +33,9 @@ Run the web server:
 cd cd packages/web/
 pnpm devs
 ```
+
+Deploy the stack:
+
+```bash
+npx sst deploy --stage prod
+```

@@ -20,6 +20,9 @@ export function GraphQL({ stack }: StackContext) {
   });
 
   const graphQL = new Api(stack, "Api", {
+    cors: {
+      allowMethods: ["GET", "POST"],
+    },
     routes: {
       "POST /graphql": {
         type: "graphql",
