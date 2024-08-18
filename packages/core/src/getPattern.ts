@@ -2,14 +2,18 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { DBPattern } from "./dbTypes";
 import { Pattern } from "./types";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { Config } from "sst/node/config";
 
 export async function getPattern({
   id,
 }: {
   id: string;
 }): Promise<Pattern | undefined> {
-  //TODO: ENV VARIABLES
+  const credentials = {
+    region: Config.AWS_REGION,
+    accessKeyId: Config.AWS_ACCESS_KEY_ID,
+    secretAccessKey: Config.AWS_SECRET_ACCESS_KEY,
+  };
 
   const dynamoDb = new DynamoDB({
     credentials,
@@ -19,7 +23,7 @@ export async function getPattern({
   try {
     const results = await dynamoDb.getItem({
       //todo: get table name from env
-      TableName: ""
+      TableName: Config.PATTERNS_TABLE_NAME,
       Key: marshall({
         patternId: id,
         //todo: get userId from auth
