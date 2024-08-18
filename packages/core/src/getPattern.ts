@@ -1,3 +1,4 @@
+import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { DBPattern } from "./dbTypes";
 import { Pattern } from "./types";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
@@ -10,36 +11,28 @@ export async function getPattern({
 }): Promise<Pattern | undefined> {
   //TODO: ENV VARIABLES
 
-  //todo: fix type
-  const dynamoDb = DynamoDBDocument.from(
-    new DynamoDB({
-      credentials,
-    }),
-    {
-      marshallOptions: {
-        convertEmptyValues: false,
-        removeUndefinedValues: true,
-        convertClassInstanceToMap: true,
-      },
-    }
-  );
+  const dynamoDb = new DynamoDB({
+    credentials,
+    region: "us-west-2",
+  });
 
   try {
-    const results = await dynamoDb.get({
+    const results = await dynamoDb.getItem({
       //todo: get table name from env
       TableName: ""
-      Key: {
+      Key: marshall({
         patternId: id,
         //todo: get userId from auth
         userId: ""
-      },
+      }),
     });
 
     const DBPattern = results.Item as unknown as DBPattern;
 
     const pattern = mapDBPatternToPattern({
-      DBPattern,
+      DBPattern: unmarshall(DBPattern),
     });
+
     return pattern;
   } catch (err) {
     console.error(err);
