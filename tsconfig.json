@@ -4,8 +4,6 @@
 
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "moduleResolution": "node"
   }
 }

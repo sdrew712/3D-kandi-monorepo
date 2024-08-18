@@ -1,7 +1,10 @@
 {
   "extends": "@tsconfig/node18/tsconfig.json",
+  "target": "es2021",
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
 }
