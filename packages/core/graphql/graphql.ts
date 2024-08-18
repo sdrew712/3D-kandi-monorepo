@@ -25,7 +25,7 @@ export async function createHandler() {
   );
 }
 
-export const handler = async (event, context) => {
+export const handler = async (event, context, callback) => {
   const lambdaHandler = await createHandler();
-  return lambdaHandler(event, context);
+  return lambdaHandler(event, context, callback);
 };
