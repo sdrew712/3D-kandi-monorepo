@@ -8,7 +8,7 @@ import { buildSchema } from "type-graphql";
 import { type Context } from "./context.type";
 import { PatternResolver } from "./pattern.resolver";
 
-export async function handler() {
+export async function createHandler() {
   const schema = await buildSchema({
     resolvers: [PatternResolver],
     emitSchemaFile: "packages/core/graphql/schema.graphql",
@@ -19,10 +19,13 @@ export async function handler() {
     introspection: true,
   });
 
-  const lambdaHandler = startServerAndCreateLambdaHandler(
+  return startServerAndCreateLambdaHandler(
     server,
     handlers.createAPIGatewayProxyEventV2RequestHandler()
   );
-
-  return lambdaHandler;
 }
+
+export const handler = async (event, context) => {
+  const lambdaHandler = await createHandler();
+  return lambdaHandler(event, context);
+};
