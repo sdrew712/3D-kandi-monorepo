@@ -31,10 +31,12 @@ export async function getPattern({
       }),
     });
 
-    const DBPattern = results.Item as unknown as DBPattern;
+    if (!results.Item) return null;
+
+    const DBPattern = unmarshall(results.Item) as DBPattern;
 
     const pattern = mapDBPatternToPattern({
-      DBPattern: unmarshall(DBPattern),
+      DBPattern,
     });
 
     return pattern;
