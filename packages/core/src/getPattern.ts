@@ -23,12 +23,11 @@ export async function getPattern({
 
   try {
     const results = await dynamoDb.getItem({
-      //todo: get table name from env
       TableName: Config.PATTERNS_TABLE_NAME,
       Key: marshall({
         patternId: id,
-        //todo: get userId from auth
-        userId: ""
+        //todo: get userId from input
+        userId: "79cca841-1992-44dd-858c-39bdaa4ac6b7",
       }),
     });
 

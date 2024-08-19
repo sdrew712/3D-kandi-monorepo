@@ -10,6 +10,17 @@ type Bead {
   z: Int
 }
 
+input BeadInput {
+  color: String!
+  x: Float!
+  y: Float!
+  z: Float
+}
+
+type Mutation {
+  createPattern(planes: PlaneInput, userId: String!): Pattern!
+}
+
 type Pattern {
   id: ID!
   planes: [Plane]!
@@ -18,6 +29,10 @@ type Pattern {
 
 type Plane {
   beads: [Bead!]!
+}
+
+input PlaneInput {
+  beads: [BeadInput!]
 }
 
 type Query {
