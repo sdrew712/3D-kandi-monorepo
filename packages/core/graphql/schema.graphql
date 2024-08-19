@@ -12,7 +12,7 @@ type Bead {
 
 type Pattern {
   id: ID!
-  planes: [Plane!]!
+  planes: [Plane]!
   userId: String!
 }
 
@@ -21,5 +21,5 @@ type Plane {
 }
 
 type Query {
-  pattern(id: ID!): Pattern!
+  pattern(id: ID!): Pattern
 }

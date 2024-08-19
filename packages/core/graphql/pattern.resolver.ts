@@ -5,7 +5,7 @@ import { getPattern } from "../src/getPattern";
 
 @Resolver()
 export class PatternResolver {
-  @Query((_returns) => Pattern)
+  @Query((_returns) => Pattern, { nullable: true })
   async pattern(
     @Arg("id", (_type) => ID, { nullable: false })
     id: string

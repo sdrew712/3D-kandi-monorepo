@@ -30,6 +30,6 @@ export class Pattern {
   @Field((type) => String)
   userId: string;
 
-  @Field((type) => [Plane])
+  @Field((type) => [Plane], { nullable: "items" })
   planes: Plane[];
 }

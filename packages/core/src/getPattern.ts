@@ -3,12 +3,13 @@ import { DBPattern } from "./dbTypes";
 import { Pattern } from "./types";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { Config } from "sst/node/config";
+import { GraphQLError } from "graphql";
 
 export async function getPattern({
   id,
 }: {
   id: string;
-}): Promise<Pattern | undefined> {
+}): Promise<Pattern | null> {
   const credentials = {
     region: Config.AWS_REGION,
     accessKeyId: Config.AWS_ACCESS_KEY_ID,
@@ -31,7 +32,7 @@ export async function getPattern({
       }),
     });
 
-    if (!results.Item) return null;
+    if (!results.Item) throw new Error();
 
     const DBPattern = unmarshall(results.Item) as DBPattern;
 
@@ -41,7 +42,7 @@ export async function getPattern({
 
     return pattern;
   } catch (err) {
-    console.error(err);
+    throw new GraphQLError("Error getting pattern");
   }
 }
 
