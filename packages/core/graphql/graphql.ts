@@ -5,8 +5,8 @@ import {
 import "reflect-metadata";
 import { ApolloServer } from "@apollo/server";
 import { buildSchema } from "type-graphql";
-import { type Context } from "./context.type";
-import { PatternResolver } from "./pattern.resolver";
+import { type Context } from "./types/context.type";
+import { PatternResolver } from "./resolvers/pattern.resolver";
 
 export async function createHandler() {
   const schema = await buildSchema({

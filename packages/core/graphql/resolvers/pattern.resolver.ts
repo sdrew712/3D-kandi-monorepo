@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { ID, Authorized, Resolver, Query, Arg } from "type-graphql";
-import { Pattern } from "./pattern.type";
-import { getPattern } from "../src/getPattern";
+import { Pattern } from "../types/pattern.type";
+import { getPattern } from "../../src/getPattern";
 
 @Resolver()
 export class PatternResolver {
