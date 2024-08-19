@@ -7,7 +7,6 @@ import { ApolloServer } from "@apollo/server";
 import { buildSchema } from "type-graphql";
 import { type Context } from "./context.type";
 import { PatternResolver } from "./pattern.resolver";
-import path from "path";
 
 export async function createHandler() {
   const schema = await buildSchema({
