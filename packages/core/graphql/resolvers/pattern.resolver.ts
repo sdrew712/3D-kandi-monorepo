@@ -48,7 +48,7 @@ export class PatternResolver {
   async createPattern(
     @Arg("userId", (_type) => String)
     userId: string,
-    @Arg("planes", (_type) => PlaneInput, { nullable: true })
+    @Arg("planes", (_type) => [PlaneInput], { nullable: true })
     planes: PlaneInput[]
   ): Promise<Pattern> {
     return createPattern({ userId, planes });
