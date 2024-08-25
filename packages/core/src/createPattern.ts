@@ -1,9 +1,10 @@
-import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
+import { marshall } from "@aws-sdk/util-dynamodb";
 import { DBPattern } from "./dbTypes";
 import { Pattern, Plane } from "./types";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { Config } from "sst/node/config";
 import { GraphQLError } from "graphql";
+import { nanoid } from "nanoid";
 
 export async function createPattern({
   userId,
@@ -11,7 +12,7 @@ export async function createPattern({
 }: {
   userId: string;
   planes?: Plane[];
-}): Promise<Pattern | null> {
+}): Promise<DBPattern | null> {
   //todo: extract this to a shared function
   const credentials = {
     region: Config.AWS_REGION,
@@ -24,18 +25,19 @@ export async function createPattern({
     region: "us-west-2",
   });
 
+  const newPattern: DBPattern = {
+    patternId: nanoid(),
+    userId,
+    planes: JSON.stringify(planes || []),
+  };
+
   try {
-    const results = await dynamoDb.putItem({
+    await dynamoDb.putItem({
       TableName: Config.PATTERNS_TABLE_NAME,
-      Item: marshall({
-        patternId: "123",
-        userId,
-        planes: JSON.stringify(planes || []),
-      }),
+      Item: marshall(newPattern),
     });
 
-    //get pattern to return it with ID
-    return pattern;
+    return newPattern;
   } catch (err) {
     console.error(err);
     throw new GraphQLError("Error getting pattern");

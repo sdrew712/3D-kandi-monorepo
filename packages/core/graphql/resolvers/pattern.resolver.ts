@@ -12,6 +12,7 @@ import {
 import { Pattern } from "../types/pattern.type";
 import { getPattern } from "../../src/getPattern";
 import { createPattern } from "../../src/createPattern";
+import { mapDBPatternToPattern } from "../utils/mapDBPatternToPattern";
 
 @InputType()
 export class PlaneInput {
@@ -51,6 +52,8 @@ export class PatternResolver {
     @Arg("planes", (_type) => [PlaneInput], { nullable: true })
     planes: PlaneInput[]
   ): Promise<Pattern> {
-    return createPattern({ userId, planes });
+    const newPattern = await createPattern({ userId, planes });
+
+    return mapDBPatternToPattern(newPattern);
   }
 }
