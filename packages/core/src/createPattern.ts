@@ -1,10 +1,10 @@
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { DBPattern } from "./dbTypes";
 import { Pattern, Plane } from "./types";
-import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { Config } from "sst/node/config";
 import { GraphQLError } from "graphql";
 import { nanoid } from "nanoid";
+import { db } from "./dynamo/db";
 
 export async function createPattern({
   userId,
@@ -13,18 +13,6 @@ export async function createPattern({
   userId: string;
   planes?: Plane[];
 }): Promise<DBPattern | null> {
-  //todo: extract this to a shared function
-  const credentials = {
-    region: Config.AWS_REGION,
-    accessKeyId: Config.AWS_ACCESS_KEY_ID,
-    secretAccessKey: Config.AWS_SECRET_ACCESS_KEY,
-  };
-
-  const dynamoDb = new DynamoDB({
-    credentials,
-    region: "us-west-2",
-  });
-
   const newPattern: DBPattern = {
     patternId: nanoid(),
     userId,
@@ -32,7 +20,7 @@ export async function createPattern({
   };
 
   try {
-    await dynamoDb.putItem({
+    await db().putItem({
       TableName: Config.PATTERNS_TABLE_NAME,
       Item: marshall(newPattern),
     });

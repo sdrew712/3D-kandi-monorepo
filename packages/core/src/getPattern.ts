@@ -4,25 +4,15 @@ import { Pattern } from "./types";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { Config } from "sst/node/config";
 import { GraphQLError } from "graphql";
+import { db } from "./dynamo/db";
 
 export async function getPattern({
   id,
 }: {
   id: string;
 }): Promise<Pattern | null> {
-  const credentials = {
-    region: Config.AWS_REGION,
-    accessKeyId: Config.AWS_ACCESS_KEY_ID,
-    secretAccessKey: Config.AWS_SECRET_ACCESS_KEY,
-  };
-
-  const dynamoDb = new DynamoDB({
-    credentials,
-    region: "us-west-2",
-  });
-
   try {
-    const results = await dynamoDb.getItem({
+    const results = await db().getItem({
       TableName: Config.PATTERNS_TABLE_NAME,
       Key: marshall({
         patternId: id,
