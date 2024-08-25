@@ -28,18 +28,6 @@ export async function createPattern({
     return newPattern;
   } catch (err) {
     console.error(err);
-    throw new GraphQLError("Error getting pattern");
+    throw new GraphQLError("Error creating pattern");
   }
-}
-
-function mapDBPatternToPattern({
-  DBPattern,
-}: {
-  DBPattern: DBPattern;
-}): Pattern {
-  return {
-    id: DBPattern.patternId,
-    userId: DBPattern.userId,
-    planes: JSON.parse(DBPattern.planes),
-  };
 }
