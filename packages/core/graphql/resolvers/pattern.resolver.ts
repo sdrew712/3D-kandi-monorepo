@@ -44,6 +44,7 @@ export class PatternResolver {
   ) {
     const pattern = await getPattern({ id });
 
+    if (!pattern) return null;
     return mapDBPatternToPattern(pattern);
   }
 

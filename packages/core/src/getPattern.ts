@@ -11,15 +11,15 @@ export async function getPattern({
 }): Promise<DBPattern | null> {
   try {
     const results = await db().getItem({
-      TableName: Config.PATTERNS_TABLE_NAME,
+      TableName: Config.KANDI_TABLE_NAME,
       Key: marshall({
-        patternId: id,
         //todo: get userId from input
-        userId: "79cca841-1992-44dd-858c-39bdaa4ac6b7",
+        pk: `USER#${"55"}`,
+        sk: `PATTERN#${id}`,
       }),
     });
 
-    if (!results.Item) throw new Error();
+    if (!results.Item) return null;
 
     const pattern = unmarshall(results.Item) as DBPattern;
 

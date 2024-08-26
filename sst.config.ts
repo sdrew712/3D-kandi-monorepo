@@ -1,5 +1,5 @@
 import { SSTConfig } from "sst";
-import { PatternsTable } from "./stacks/PatternsTable";
+import { KandiTable } from "./stacks/KandiTable";
 import { GraphQL } from "./stacks/GraphQL";
 
 export default {
@@ -10,7 +10,7 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(PatternsTable);
+    app.stack(KandiTable);
     app.stack(GraphQL);
   },
 } satisfies SSTConfig;
