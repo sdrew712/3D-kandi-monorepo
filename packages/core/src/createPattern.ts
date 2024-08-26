@@ -12,7 +12,7 @@ export async function createPattern({
 }: {
   userId: string;
   planes?: Plane[];
-}): Promise<DBPattern | null> {
+}): Promise<DBPattern> {
   const newPattern: DBPattern = {
     pk: `USER#${userId}`,
     sk: `PATTERN#${nanoid()}`,

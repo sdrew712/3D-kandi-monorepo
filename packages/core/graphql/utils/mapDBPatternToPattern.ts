@@ -1,4 +1,4 @@
-import { Pattern } from "../types/pattern.type";
+import { Pattern } from "../../src/types";
 import { DBPattern } from "../../src/dbTypes";
 
 export function mapDBPatternToPattern(DBPattern: DBPattern): Pattern {

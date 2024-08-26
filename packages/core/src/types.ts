@@ -9,3 +9,9 @@ export type Plane = {
 };
 
 export type Bead = { x: number; y: number; z?: number; color: string };
+
+export type User = {
+  id: string;
+  email: string;
+  username: string;
+};

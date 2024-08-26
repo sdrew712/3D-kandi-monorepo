@@ -1,5 +1,4 @@
 import { Authorized, Field, Float, Int, ID, ObjectType } from "type-graphql";
-import "reflect-metadata";
 
 @ObjectType()
 class Bead {

@@ -19,6 +19,7 @@ input BeadInput {
 
 type Mutation {
   createPattern(planes: [PlaneInput!], userId: String!): Pattern!
+  createUser(email: String!, username: String!): User!
 }
 
 type Pattern {
@@ -37,4 +38,10 @@ input PlaneInput {
 
 type Query {
   pattern(id: ID!): Pattern
+}
+
+type User {
+  email: String!
+  id: ID!
+  username: String!
 }
