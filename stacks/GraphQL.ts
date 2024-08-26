@@ -7,7 +7,7 @@ export function GraphQL({ stack }: StackContext) {
     stack,
     "AWS_SECRET_ACCESS_KEY"
   );
-  const PATTERNS_TABLE_NAME = new Config.Secret(stack, "PATTERNS_TABLE_NAME");
+  const KANDI_TABLE_NAME = new Config.Secret(stack, "KANDI_TABLE_NAME");
 
   const graphQLHandler = new Function(stack, "MyFunction", {
     handler: "packages/core/graphql/graphql.handler",
@@ -15,7 +15,7 @@ export function GraphQL({ stack }: StackContext) {
       AWS_REGION,
       AWS_ACCESS_KEY_ID,
       AWS_SECRET_ACCESS_KEY,
-      PATTERNS_TABLE_NAME,
+      KANDI_TABLE_NAME,
     ],
   });
 
