@@ -1,7 +1,5 @@
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { DBPattern } from "./dbTypes";
-import { Pattern } from "./types";
-import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { Config } from "sst/node/config";
 import { GraphQLError } from "graphql";
 import { db } from "./dynamo/db";
@@ -10,7 +8,7 @@ export async function getPattern({
   id,
 }: {
   id: string;
-}): Promise<Pattern | null> {
+}): Promise<DBPattern | null> {
   try {
     const results = await db().getItem({
       TableName: Config.PATTERNS_TABLE_NAME,
@@ -23,26 +21,10 @@ export async function getPattern({
 
     if (!results.Item) throw new Error();
 
-    const DBPattern = unmarshall(results.Item) as DBPattern;
-
-    const pattern = mapDBPatternToPattern({
-      DBPattern,
-    });
+    const pattern = unmarshall(results.Item) as DBPattern;
 
     return pattern;
   } catch (err) {
     throw new GraphQLError("Error getting pattern");
   }
-}
-
-function mapDBPatternToPattern({
-  DBPattern,
-}: {
-  DBPattern: DBPattern;
-}): Pattern {
-  return {
-    id: DBPattern.patternId,
-    userId: DBPattern.userId,
-    planes: JSON.parse(DBPattern.planes),
-  };
 }

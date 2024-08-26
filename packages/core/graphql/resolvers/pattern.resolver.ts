@@ -42,7 +42,9 @@ export class PatternResolver {
     @Arg("id", (_type) => ID)
     id: string
   ) {
-    return getPattern({ id });
+    const pattern = await getPattern({ id });
+
+    return mapDBPatternToPattern(pattern);
   }
 
   @Mutation((_returns) => Pattern)
