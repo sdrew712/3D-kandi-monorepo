@@ -10,10 +10,20 @@ import {
 } from "type-graphql";
 import { User } from "../types/user.type";
 import { createUser } from "../../src/createUser";
+import { getUser } from "../../src/getUser";
 import { mapDBUserToUser } from "../utils/mapDBUserToUser";
 
 @Resolver()
 export class UserResolver {
+  @Query((_returns) => User, { nullable: true })
+  async user(
+    @Arg("id", (_type) => ID)
+    id: string
+  ) {
+    const user = await getUser({ id });
+    return mapDBUserToUser(user);
+  }
+
   @Mutation((_returns) => User)
   async createUser(
     @Arg("email", (_type) => String)
