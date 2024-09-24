@@ -10,7 +10,7 @@ export default function Pattern() {
   const result = useSuspenseQuery(GET_PATTERN, {
     variables: {
       //todo: get pattern with ID
-      patternId: "123",
+      patternId: "eQ71dQ1scxh5T1nivXQ_-",
     },
   });
 
@@ -32,7 +32,7 @@ export default function Pattern() {
 }
 
 const GET_PATTERN = gql`
-  query Query($patternId: String!) {
+  query Query($patternId: ID!) {
     pattern(id: $patternId) {
       id
       userId

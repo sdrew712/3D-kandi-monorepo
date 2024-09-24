@@ -9,7 +9,7 @@ import {
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: "http://localhost:4000/",
+    uri: "https://ykpfkfot1d.execute-api.us-west-2.amazonaws.com/graphql",
     fetchOptions: { cache: "no-store" },
   });
 
