@@ -29,9 +29,11 @@ export class UserResolver {
     @Arg("email", (_type) => String)
     email: string,
     @Arg("username", (_type) => String)
-    username: string
+    username: string,
+    @Arg("password", (_type) => String)
+    password: string
   ): Promise<User> {
-    const newUser = await createUser({ email, username });
+    const newUser = await createUser({ email, username, password });
 
     return mapDBUserToUser(newUser);
   }
