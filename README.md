@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, install the dependencies:
@@ -17,12 +15,18 @@ pnpm dev
 Run the web server:
 
 ```bash
-cd cd packages/web/
-pnpm devs
+cd packages/web/
+pnpm dev
 ```
 
 ## Deployment
 
 ```bash
 npx sst deploy --stage prod
+```
+
+## Setting secrets
+
+```bash
+npx sst secrets set <NAME_OF_SECRET> "<VALUE_OF_SECRET>"
 ```
