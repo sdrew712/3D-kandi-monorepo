@@ -94,6 +94,9 @@ importers:
       '@graphql-codegen/client-preset':
         specifier: ^4.3.3
         version: 4.3.3(graphql@16.9.0)
+      '@graphql-typed-document-node/core':
+        specifier: ^3.2.0
+        version: 3.2.0(graphql@16.9.0)
       '@react-three/drei':
         specifier: ^9.99.3
         version: 9.108.4(@react-three/fiber@8.16.8)(@types/react@18.3.3)(@types/three@0.161.2)(immer@9.0.21)(react-dom@18.3.1)(react@18.3.1)(three@0.161.0)
@@ -103,6 +106,9 @@ importers:
       firebase:
         specifier: ^10.13.2
         version: 10.13.2
+      graphql:
+        specifier: ^16.9.0
+        version: 16.9.0
       next:
         specifier: 14.2.13
         version: 14.2.13(@babel/core@7.24.7)(react-dom@18.3.1)(react@18.3.1)
