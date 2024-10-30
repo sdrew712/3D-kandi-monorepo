@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import WebGL from "three/examples/jsm/capabilities/WebGL.js";
-import Navigation from "./Navigation";
+import Link from "next/link";
 
 export default function Home() {
   useEffect(() => {
@@ -14,5 +14,20 @@ export default function Home() {
     }
   }, []);
 
-  return <Navigation />;
+  return <Links />;
+}
+
+function Links() {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/pattern">Pattern</Link>
+        </li>
+      </ul>
+    </nav>
+  );
 }
