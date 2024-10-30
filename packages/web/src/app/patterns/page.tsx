@@ -2,12 +2,27 @@
 import { useSuspenseQuery, gql } from "@apollo/client";
 import { Pattern } from "../../../../core/src/types";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/utils/useAuth";
 
 export default function Patterns() {
-  const patterns = getPatterns();
-  if (!patterns) {
+  const { userId, loading: userLoading } = useAuth();
+
+  const result = useSuspenseQuery(GET_PATTERNS, {
+    variables: {
+      userId: userId || "",
+    },
+  });
+
+  const patterns = result.data.patterns as Pattern[];
+
+  if (!patterns || patterns.length === 0 || userLoading) {
     return <div>Loading...</div>;
   }
+
+  if (!userId && !userLoading) {
+    return <div>Not logged in.</div>;
+  }
+
   return (
     <div>
       {patterns.map((pattern) => (
@@ -28,19 +43,9 @@ function PatternCard({ pattern }: { pattern: Pattern }) {
   );
 }
 
-function getPatterns(): Pattern[] {
-  const result = useSuspenseQuery(GET_PATTERN, {
-    variables: {
-      //todo: get all patterns for user
-      patternId: "eQ71dQ1scxh5T1nivXQ_-",
-    },
-  });
-  return [(result.data as { pattern: Pattern }).pattern];
-}
-
-const GET_PATTERN = gql`
-  query Query($patternId: ID!) {
-    pattern(id: $patternId) {
+const GET_PATTERNS = gql`
+  query Patterns($userId: ID!) {
+    patterns(userId: $userId) {
       id
       userId
       planes {
