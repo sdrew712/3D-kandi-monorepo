@@ -10,6 +10,7 @@ import {
 } from "type-graphql";
 import { Pattern } from "../types/pattern.type";
 import { getPattern } from "../../src/getPattern";
+import { getPatterns } from "../../src/getPatterns";
 import { createPattern } from "../../src/createPattern";
 import { mapDBPatternToPattern } from "../utils/mapDBPatternToPattern";
 
@@ -45,6 +46,21 @@ export class PatternResolver {
 
     if (!pattern) return null;
     return mapDBPatternToPattern(pattern);
+  }
+
+  @Query((_returns) => [Pattern], { nullable: true })
+  async patterns(
+    @Arg("userId", (_type) => ID)
+    userId: string
+  ) {
+    const patterns = await getPatterns({ userId });
+
+    if (!patterns) return null;
+
+    const mappedPatterns = patterns.map((pattern) =>
+      mapDBPatternToPattern(pattern)
+    );
+    return mappedPatterns;
   }
 
   @Mutation((_returns) => Pattern)
