@@ -16,3 +16,17 @@
   margin: 10px;
   cursor: pointer;
 }
+
+.topNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #ff2e63;
+}
+
+.topNav div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
