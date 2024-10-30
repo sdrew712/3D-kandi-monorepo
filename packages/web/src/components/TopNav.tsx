@@ -11,7 +11,7 @@ export default function TopNav() {
       <div className={styles.centered}>
         <Link href="/">Home</Link>
 
-        <Link href="/pattern">Pattern</Link>
+        <Link href="/patterns">Patterns</Link>
       </div>
 
       {renderAuthOptions()}

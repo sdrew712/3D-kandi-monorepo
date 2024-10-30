@@ -1,18 +1,24 @@
 "use client";
 
-import styles from "../../page.module.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { renderPattern } from "@/utils/renderPattern";
 import { useSuspenseQuery, gql } from "@apollo/client";
+import { useParams } from "next/navigation";
+import styles from "../../../page.module.css";
 
 export default function Pattern() {
+  const { patternId } = useParams();
+
   const result = useSuspenseQuery(GET_PATTERN, {
     variables: {
-      //todo: get pattern with ID
-      patternId: "eQ71dQ1scxh5T1nivXQ_-",
+      patternId,
     },
   });
+
+  if (!result.data.pattern) {
+    return <div>Pattern not found.</div>;
+  }
 
   return (
     <div className={styles.canvasContainer}>
