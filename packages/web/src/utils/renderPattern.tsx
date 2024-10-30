@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as THREE from "three";
-import Square from "@/app/Square";
+import Square from "../components/Square";
 import { Pattern } from "../../../core/src/types";
 import { handleMouseMove } from "@/utils/handleMouseMove";
 import { useAddPatternSquare } from "@/utils/useAddPatternSquare";
