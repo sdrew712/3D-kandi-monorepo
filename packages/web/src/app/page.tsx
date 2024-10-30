@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import WebGL from "three/examples/jsm/capabilities/WebGL.js";
-import Link from "next/link";
 
 export default function Home() {
   useEffect(() => {
