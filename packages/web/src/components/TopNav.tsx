@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import signOut from "../../../core/src/firebase/auth/signout";
 import { useAuth } from "../utils/useAuth";
 
