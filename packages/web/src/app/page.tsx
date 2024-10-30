@@ -14,20 +14,9 @@ export default function Home() {
     }
   }, []);
 
-  return <Links />;
+  return <HomeContent />;
 }
 
-function Links() {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/pattern">Pattern</Link>
-        </li>
-      </ul>
-    </nav>
-  );
+function HomeContent() {
+  return <div>Welcome to my kandi site!</div>;
 }
