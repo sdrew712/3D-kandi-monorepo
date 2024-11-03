@@ -20,7 +20,7 @@ function Page() {
 
     // else successful
     console.log(result);
-    return router.push("/pattern");
+    return router.push("/patterns");
   };
   return (
     <div className="wrapper">

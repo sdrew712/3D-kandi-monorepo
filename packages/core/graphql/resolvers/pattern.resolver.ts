@@ -35,6 +35,7 @@ export class BeadInput {
   z?: number;
 }
 
+@Authorized()
 @Resolver()
 export class PatternResolver {
   @Query((_returns) => Pattern, { nullable: true })

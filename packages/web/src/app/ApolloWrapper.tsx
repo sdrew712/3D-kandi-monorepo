@@ -6,6 +6,7 @@ import {
   ApolloClient,
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
+import { useAuth } from "@/utils/useAuth";
 
 function makeClient() {
   const env = process.env.NODE_ENV;
@@ -20,9 +21,14 @@ function makeClient() {
     fetchOptions: { cache: "no-store" },
   });
 
+  const { authToken } = useAuth();
+
   return new ApolloClient({
     cache: new InMemoryCache(),
     link: httpLink,
+    headers: {
+      authorization: `Bearer ${authToken}`,
+    },
   });
 }
 
