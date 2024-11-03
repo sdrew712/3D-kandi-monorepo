@@ -16,19 +16,19 @@ function makeClient() {
     uri = "https://5kkazk3271.execute-api.us-west-2.amazonaws.com";
   }
 
-  const httpLink = new HttpLink({
+  const { authToken } = useAuth();
+
+  const authLink = new HttpLink({
     uri: uri + "/graphql",
     fetchOptions: { cache: "no-store" },
+    headers: {
+      authorization: authToken ? `Bearer ${authToken}` : "",
+    },
   });
-
-  const { authToken } = useAuth();
 
   return new ApolloClient({
     cache: new InMemoryCache(),
-    link: httpLink,
-    headers: {
-      authorization: `Bearer ${authToken}`,
-    },
+    link: authLink,
   });
 }
 
