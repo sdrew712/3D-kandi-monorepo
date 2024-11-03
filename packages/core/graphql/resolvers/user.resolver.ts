@@ -15,6 +15,7 @@ import { mapDBUserToUser } from "../utils/mapDBUserToUser";
 
 @Resolver()
 export class UserResolver {
+  @Authorized()
   @Query((_returns) => User, { nullable: true })
   async user(
     @Arg("id", (_type) => ID)
