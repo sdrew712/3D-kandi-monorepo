@@ -38,7 +38,7 @@ input PlaneInput {
 
 type Query {
   pattern(id: ID!): Pattern
-  patterns(userId: ID!): [Pattern!]
+  patterns: [Pattern!]
   user(id: ID!): User
 }
 

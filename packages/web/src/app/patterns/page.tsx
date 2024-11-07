@@ -7,11 +7,7 @@ import { useAuth } from "@/utils/useAuth";
 export default function Patterns() {
   const { userId, loading: userLoading } = useAuth();
 
-  const result = useSuspenseQuery(GET_PATTERNS, {
-    variables: {
-      userId: userId || "",
-    },
-  });
+  const result = useSuspenseQuery(GET_PATTERNS);
 
   const patterns = result.data.patterns as Pattern[];
 
@@ -44,8 +40,8 @@ function PatternCard({ pattern }: { pattern: Pattern }) {
 }
 
 const GET_PATTERNS = gql`
-  query Patterns($userId: ID!) {
-    patterns(userId: $userId) {
+  query Patterns {
+    patterns {
       id
       userId
       planes {

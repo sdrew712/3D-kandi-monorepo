@@ -53,11 +53,8 @@ export class PatternResolver {
   }
 
   @Query((_returns) => [Pattern], { nullable: true })
-  async patterns(
-    @Arg("userId", (_type) => ID)
-    userId: string
-  ) {
-    const patterns = await getPatterns({ userId });
+  async patterns(@Ctx() ctx: Context) {
+    const patterns = await getPatterns({ userId: ctx.userId });
 
     if (!patterns) return null;
 
