@@ -7,11 +7,13 @@ import {
   Mutation,
   InputType,
   Field,
+  Ctx,
 } from "type-graphql";
 import { User } from "../types/user.type";
 import { createUser } from "../../src/createUser";
 import { getUser } from "../../src/getUser";
 import { mapDBUserToUser } from "../utils/mapDBUserToUser";
+import { type Context } from "../types/context.type";
 
 @Resolver()
 export class UserResolver {
@@ -19,8 +21,11 @@ export class UserResolver {
   @Query((_returns) => User, { nullable: true })
   async user(
     @Arg("id", (_type) => ID)
-    id: string
+    id: string,
+    @Ctx() ctx: Context
   ) {
+    if (!Boolean(ctx.userId === id)) return null;
+
     const user = await getUser({ id });
     return mapDBUserToUser(user);
   }
