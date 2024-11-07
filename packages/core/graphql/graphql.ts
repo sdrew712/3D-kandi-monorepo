@@ -9,6 +9,7 @@ import { type Context } from "./types/context.type";
 import { PatternResolver } from "./resolvers/pattern.resolver";
 import { UserResolver } from "./resolvers/user.resolver";
 import { customAuthChecker } from "./authChecker";
+import { getFirebaseUser } from "../src/firebase/getFirebaseUser";
 
 export async function createHandler() {
   const schema = await buildSchema({
@@ -27,9 +28,12 @@ export async function createHandler() {
     server,
     handlers.createAPIGatewayProxyEventV2RequestHandler(),
     {
-      context: async (req) => ({
-        authorization: req.event.headers.authorization,
-      }),
+      context: async (req) => {
+        const { userId, email } = await getFirebaseUser(
+          req.event.headers.authorization
+        );
+        return { userId, email };
+      },
     }
   );
 }

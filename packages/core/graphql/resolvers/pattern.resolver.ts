@@ -47,9 +47,7 @@ export class PatternResolver {
     id: string,
     @Ctx() ctx: Context
   ) {
-    const { userId } = await getFirebaseUser(ctx.authorization);
-
-    const pattern = await getPattern({ id, userId });
+    const pattern = await getPattern({ id, userId: ctx.userId });
 
     if (!pattern) return null;
     return mapDBPatternToPattern(pattern);

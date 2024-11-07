@@ -5,7 +5,7 @@ export const customAuthChecker: AuthChecker<Context> = (
   { root, args, context, info },
   roles
 ) => {
-  const authToken = context.authorization;
+  const userId = context.userId;
 
-  return Boolean(authToken);
+  return Boolean(userId);
 };
