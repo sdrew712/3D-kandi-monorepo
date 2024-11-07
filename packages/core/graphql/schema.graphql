@@ -18,7 +18,7 @@ input BeadInput {
 }
 
 type Mutation {
-  createPattern(planes: [PlaneInput!], userId: String!): Pattern!
+  createPattern(planes: [PlaneInput!]): Pattern!
   createUser(email: String!, password: String!, username: String!): User!
 }
 

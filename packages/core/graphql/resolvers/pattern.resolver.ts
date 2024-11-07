@@ -15,7 +15,6 @@ import { getPatterns } from "../../src/getPatterns";
 import { createPattern } from "../../src/createPattern";
 import { mapDBPatternToPattern } from "../utils/mapDBPatternToPattern";
 import { type Context } from "../types/context.type";
-import { getFirebaseUser } from "../../src/firebase/getFirebaseUser";
 
 @InputType()
 export class PlaneInput {
@@ -70,12 +69,11 @@ export class PatternResolver {
 
   @Mutation((_returns) => Pattern)
   async createPattern(
-    @Arg("userId", (_type) => String)
-    userId: string,
     @Arg("planes", (_type) => [PlaneInput], { nullable: true })
-    planes: PlaneInput[]
+    planes: PlaneInput[],
+    @Ctx() ctx: Context
   ): Promise<Pattern> {
-    const newPattern = await createPattern({ userId, planes });
+    const newPattern = await createPattern({ userId: ctx.userId, planes });
 
     return mapDBPatternToPattern(newPattern);
   }
