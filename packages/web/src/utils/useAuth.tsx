@@ -23,7 +23,6 @@ export function useAuth() {
 
     return () => unsubscribe();
   }, []);
-  console.log(authToken);
 
   return { user, userId: user?.uid, authToken, loading };
 }

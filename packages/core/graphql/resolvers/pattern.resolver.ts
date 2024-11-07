@@ -3,6 +3,7 @@ import {
   Authorized,
   Resolver,
   Query,
+  Ctx,
   Arg,
   Mutation,
   InputType,
@@ -13,6 +14,8 @@ import { getPattern } from "../../src/getPattern";
 import { getPatterns } from "../../src/getPatterns";
 import { createPattern } from "../../src/createPattern";
 import { mapDBPatternToPattern } from "../utils/mapDBPatternToPattern";
+import { type Context } from "../types/context.type";
+import { getFirebaseUser } from "../../src/firebase/getFirebaseUser";
 
 @InputType()
 export class PlaneInput {
@@ -41,9 +44,12 @@ export class PatternResolver {
   @Query((_returns) => Pattern, { nullable: true })
   async pattern(
     @Arg("id", (_type) => ID)
-    id: string
+    id: string,
+    @Ctx() ctx: Context
   ) {
-    const pattern = await getPattern({ id });
+    const { userId } = await getFirebaseUser(ctx.authorization);
+
+    const pattern = await getPattern({ id, userId });
 
     if (!pattern) return null;
     return mapDBPatternToPattern(pattern);

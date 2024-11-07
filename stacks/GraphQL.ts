@@ -8,6 +8,12 @@ export function GraphQL({ stack }: StackContext) {
     "AWS_SECRET_ACCESS_KEY"
   );
   const KANDI_TABLE_NAME = new Config.Secret(stack, "KANDI_TABLE_NAME");
+  const FIREBASE_PRIVATE_KEY = new Config.Secret(stack, "FIREBASE_PRIVATE_KEY");
+  const FIREBASE_CLIENT_EMAIL = new Config.Secret(
+    stack,
+    "FIREBASE_CLIENT_EMAIL"
+  );
+  const FIREBASE_PROJECT_ID = new Config.Secret(stack, "FIREBASE_PROJECT_ID");
 
   const graphQLHandler = new Function(stack, "MyFunction", {
     handler: "packages/core/graphql/graphql.handler",
@@ -16,6 +22,9 @@ export function GraphQL({ stack }: StackContext) {
       AWS_ACCESS_KEY_ID,
       AWS_SECRET_ACCESS_KEY,
       KANDI_TABLE_NAME,
+      FIREBASE_PRIVATE_KEY,
+      FIREBASE_CLIENT_EMAIL,
+      FIREBASE_PROJECT_ID,
     ],
   });
 
