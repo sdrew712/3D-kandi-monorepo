@@ -5,6 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 import { renderPattern } from "@/utils/renderPattern";
 import { useSuspenseQuery, gql } from "@apollo/client";
 import { useParams } from "next/navigation";
+import { Pattern as PatternType } from "../../../../../core/src/types";
 import styles from "../../../page.module.css";
 
 export default function Pattern() {
@@ -16,7 +17,10 @@ export default function Pattern() {
     },
   });
 
-  if (!result.data.pattern) {
+  //todo: fix this type
+  const pattern = (result.data as any).pattern as PatternType;
+
+  if (!pattern) {
     return <div>Pattern not found.</div>;
   }
 
@@ -31,7 +35,7 @@ export default function Pattern() {
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         {/* todo: fix this type */}
-        {renderPattern(result.data.pattern)}
+        {renderPattern(pattern)}
       </Canvas>
     </div>
   );

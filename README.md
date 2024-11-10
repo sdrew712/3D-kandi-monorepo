@@ -19,7 +19,13 @@ cd packages/web/
 pnpm dev
 ```
 
-## Deployment
+## Deploy web server
+
+npx sst bind --stage prod npx sst build
+npx sst deploy --region us-west-2 --stage prod
+
+
+## Deploy graph
 
 ```bash
 npx sst deploy --stage prod

@@ -10,6 +10,7 @@ import { useAuth } from "@/utils/useAuth";
 import Error from "next/error";
 
 function makeClient({ authToken }: { authToken: string }) {
+  //todo: make sure this works
   const env = process.env.NODE_ENV;
 
   let uri = "https://ykpfkfot1d.execute-api.us-west-2.amazonaws.com";

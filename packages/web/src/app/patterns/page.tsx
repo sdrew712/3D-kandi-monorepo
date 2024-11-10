@@ -9,7 +9,7 @@ export default function Patterns() {
 
   const result = useSuspenseQuery(GET_PATTERNS);
 
-  const patterns = result.data.patterns as Pattern[];
+  const patterns = (result.data as any).patterns as Pattern[];
 
   if (!patterns || patterns.length === 0 || userLoading) {
     return <div>Loading...</div>;
