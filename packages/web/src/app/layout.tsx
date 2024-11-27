@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ApolloWrapper } from "./ApolloWrapper";
+import ProtectedProvider from "@/components/ProtectedProvider";
 import TopNav from "../components/TopNav";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,8 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ApolloWrapper>
-          <TopNav />
-          {children}
+          <ProtectedProvider>
+            <TopNav />
+            {children}
+          </ProtectedProvider>
         </ApolloWrapper>
       </body>
     </html>

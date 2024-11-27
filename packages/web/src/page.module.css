@@ -39,3 +39,18 @@
   gap: 10px;
   align-items: center;
 }
+
+.unauthenticated {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 8rem;
+}
+
+.unauthenticated a {
+  color: blueviolet;
+  border-radius: 12px;
+  border: 2px solid pink;
+  padding: 6px;
+}

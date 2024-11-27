@@ -27,11 +27,11 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/three": "^0.161.2",
-    "aws-cdk-lib": "2.124.0",
+    "aws-cdk-lib": "2.166.0",
     "constructs": "10.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
-    "sst": "^2.40.1",
+    "sst": "^2.43.3",
     "typescript": "^5"
   }
 }
