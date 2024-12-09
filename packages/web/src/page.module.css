@@ -54,3 +54,17 @@
   border: 2px solid pink;
   padding: 6px;
 }
+
+#patternsPage {
+  padding: 32px;
+}
+
+.patternCard {
+  border-radius: 12px;
+  border: 2px solid pink;
+  max-width: 400px;
+  line-break: anywhere;
+}
+.patternCard > div {
+  border-top: 2px solid pink;
+}

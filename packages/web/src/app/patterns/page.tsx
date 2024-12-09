@@ -1,8 +1,9 @@
 "use client";
 import { useSuspenseQuery, gql } from "@apollo/client";
 import { Pattern } from "../../../../core/src/types";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/utils/useAuth";
+import { PatternCard } from "@/components/PatternCard";
+import styles from "../../page.module.css";
 
 export default function Patterns() {
   const { userId, loading: userLoading } = useAuth();
@@ -20,21 +21,10 @@ export default function Patterns() {
   }
 
   return (
-    <div>
+    <div id={styles.patternsPage}>
       {patterns.map((pattern) => (
         <PatternCard key={pattern.id} pattern={pattern} />
       ))}
-    </div>
-  );
-}
-
-function PatternCard({ pattern }: { pattern: Pattern }) {
-  const router = useRouter();
-
-  return (
-    <div onClick={() => router.push(`/pattern/${pattern.id}`)}>
-      <div>{pattern.id}</div>
-      <div>{JSON.stringify(pattern.planes)}</div>
     </div>
   );
 }
