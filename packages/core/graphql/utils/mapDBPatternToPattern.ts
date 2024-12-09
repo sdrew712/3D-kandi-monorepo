@@ -6,5 +6,6 @@ export function mapDBPatternToPattern(DBPattern: DBPattern): Pattern {
     id: DBPattern.sk.replace("PATTERN#", ""),
     userId: DBPattern.pk.replace("USER#", ""),
     planes: JSON.parse(DBPattern.planes),
+    title: DBPattern.title,
   };
 }

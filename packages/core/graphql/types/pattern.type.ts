@@ -29,6 +29,9 @@ export class Pattern {
   @Field((type) => String)
   userId: string;
 
+  @Field((type) => String)
+  title: string;
+
   @Field((type) => [Plane], { nullable: "items" })
   planes: Plane[];
 }

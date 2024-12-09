@@ -2,6 +2,7 @@ export type DBPattern = {
   pk: string;
   sk: string;
   planes: string;
+  title: string;
 };
 
 export type DBUser = {

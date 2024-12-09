@@ -68,9 +68,14 @@ export class PatternResolver {
   async createPattern(
     @Arg("planes", (_type) => [PlaneInput], { nullable: true })
     planes: PlaneInput[],
+    @Arg("title", { nullable: true }) title: string,
     @Ctx() ctx: Context
   ): Promise<Pattern> {
-    const newPattern = await createPattern({ userId: ctx.userId, planes });
+    const newPattern = await createPattern({
+      userId: ctx.userId,
+      planes,
+      title,
+    });
 
     return mapDBPatternToPattern(newPattern);
   }

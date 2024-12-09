@@ -9,14 +9,17 @@ import { db } from "./dynamo/db";
 export async function createPattern({
   userId,
   planes,
+  title,
 }: {
   userId: string;
   planes?: Plane[];
+  title: string;
 }): Promise<DBPattern> {
   const newPattern: DBPattern = {
     pk: `USER#${userId}`,
     sk: `PATTERN#${nanoid()}`,
     planes: JSON.stringify(planes || []),
+    title,
   };
 
   try {

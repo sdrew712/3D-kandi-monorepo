@@ -2,6 +2,7 @@ export type Pattern = {
   id: string;
   userId: string;
   planes: Plane[];
+  title: string;
 };
 
 export type Plane = {
