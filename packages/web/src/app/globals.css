@@ -19,3 +19,13 @@ a {
   color: white;
   text-decoration: none;
 }
+
+button {
+  background-color: #ff2e63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 4px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}

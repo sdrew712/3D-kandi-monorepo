@@ -3,10 +3,12 @@ import { useSuspenseQuery, gql } from "@apollo/client";
 import { Pattern } from "../../../../core/src/types";
 import { useAuth } from "@/utils/useAuth";
 import { PatternCard } from "@/components/PatternCard";
+import { useRouter } from "next/navigation";
 import styles from "../../page.module.css";
 
 export default function Patterns() {
   const { userId, loading: userLoading } = useAuth();
+  const router = useRouter();
 
   const result = useSuspenseQuery(GET_PATTERNS);
 
@@ -22,7 +24,7 @@ export default function Patterns() {
 
   return (
     <div id={styles.patternsPage}>
-      <button className="">+ Create Pattern</button>
+      <button onClick={() => router.push("/new")}>+ Create Pattern</button>
       {patterns.map((pattern) => (
         <PatternCard key={pattern.id} pattern={pattern} />
       ))}

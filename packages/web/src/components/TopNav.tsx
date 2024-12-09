@@ -23,7 +23,7 @@ function renderAuthOptions() {
   const { user } = useAuth();
 
   if (user) {
-    return <button onClick={signOut}>Sign out</button>;
+    return <div onClick={signOut}>Sign out</div>;
   }
 
   return (
