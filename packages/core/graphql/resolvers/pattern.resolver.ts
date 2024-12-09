@@ -68,7 +68,8 @@ export class PatternResolver {
   async createPattern(
     @Arg("planes", (_type) => [PlaneInput], { nullable: true })
     planes: PlaneInput[],
-    @Arg("title", { nullable: true }) title: string,
+    @Arg("title", (_type) => String)
+    title: string,
     @Ctx() ctx: Context
   ): Promise<Pattern> {
     const newPattern = await createPattern({
