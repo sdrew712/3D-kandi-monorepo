@@ -5,8 +5,9 @@ import firebase_app from "../../../core/src/firebase/config";
 const auth = getAuth(firebase_app);
 
 export function useAuth() {
+  const token = localStorage.getItem("token");
   const [user, setUser] = useState<User | null>(null);
-  const [authToken, setAuthToken] = useState<string | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(token ?? null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,8 +16,10 @@ export function useAuth() {
       if (user) {
         const token = await getIdToken(user);
         setAuthToken(token);
+        localStorage.setItem("token", token);
       } else {
         setAuthToken(null);
+        localStorage.setItem("token", "");
       }
       setLoading(false);
     });
