@@ -59,6 +59,16 @@
   padding: 32px;
 }
 
+#patternsPage button {
+  background-color: #ff2e63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 4px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
 .patternCard {
   border-radius: 12px;
   border: 2px solid pink;

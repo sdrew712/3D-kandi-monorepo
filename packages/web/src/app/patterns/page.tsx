@@ -22,6 +22,7 @@ export default function Patterns() {
 
   return (
     <div id={styles.patternsPage}>
+      <button className="">+ Create Pattern</button>
       {patterns.map((pattern) => (
         <PatternCard key={pattern.id} pattern={pattern} />
       ))}
