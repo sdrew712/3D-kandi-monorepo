@@ -24,10 +24,13 @@ export default function Patterns() {
 
   return (
     <div id={styles.patternsPage}>
+      <h2>My Patterns</h2>
       <button onClick={() => router.push("/new")}>+ Create Pattern</button>
-      {patterns.map((pattern) => (
-        <PatternCard key={pattern.id} pattern={pattern} />
-      ))}
+      <div>
+        {patterns.map((pattern) => (
+          <PatternCard key={pattern.id} pattern={pattern} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -37,6 +40,7 @@ const GET_PATTERNS = gql`
     patterns {
       id
       userId
+      title
       planes {
         beads {
           x

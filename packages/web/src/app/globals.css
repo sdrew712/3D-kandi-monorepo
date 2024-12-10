@@ -8,7 +8,11 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  color: blueviolet;
+  color: #ff2e63;
+}
+
+h2 {
+  color: black;
 }
 
 body {

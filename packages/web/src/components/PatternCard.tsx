@@ -10,8 +10,7 @@ export function PatternCard({ pattern }: { pattern: Pattern }) {
       onClick={() => router.push(`/pattern/${pattern.id}`)}
       className={styles.patternCard}
     >
-      {JSON.stringify(pattern.planes)}
-      <div>{pattern.id}</div>
+      {pattern.title}
     </div>
   );
 }
