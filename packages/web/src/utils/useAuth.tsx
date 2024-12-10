@@ -27,5 +27,11 @@ export function useAuth() {
     return () => unsubscribe();
   }, []);
 
-  return { user, userId: user?.uid, authToken, loading };
+  return {
+    user,
+    userId: user?.uid,
+    authToken,
+    loading,
+    isAuthenticated: Boolean(authToken),
+  };
 }

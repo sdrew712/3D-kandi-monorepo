@@ -9,9 +9,9 @@ export default function ProtectedProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { userId } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  if (userId) {
+  if (isAuthenticated) {
     return <>{children}</>;
   }
 
