@@ -5,7 +5,11 @@ import firebase_app from "../../../core/src/firebase/config";
 const auth = getAuth(firebase_app);
 
 export function useAuth() {
-  const token = localStorage.getItem("token");
+  let token = null;
+
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
   const [user, setUser] = useState<User | null>(null);
   const [authToken, setAuthToken] = useState<string | null>(token ?? null);
   const [loading, setLoading] = useState(true);
