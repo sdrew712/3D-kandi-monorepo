@@ -34,7 +34,6 @@ export default function Pattern() {
         <OrbitControls />
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        {/* todo: fix this type */}
         {renderPattern(pattern)}
       </Canvas>
     </div>
