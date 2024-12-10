@@ -90,3 +90,15 @@
 #newPage h2 {
   margin-bottom: 16px;
 }
+
+#homePage {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15%;
+  align-items: center;
+}
+
+#homePage a {
+  color: blueviolet;
+  text-decoration: underline;
+}

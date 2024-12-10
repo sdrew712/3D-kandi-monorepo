@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
+import styles from "../page.module.css";
 import WebGL from "three/examples/jsm/capabilities/WebGL.js";
+import Link from "next/link";
 
 export default function Home() {
   useEffect(() => {
@@ -17,5 +19,13 @@ export default function Home() {
 }
 
 function HomeContent() {
-  return <div>Welcome to my kandi site!</div>;
+  return (
+    <div id={styles.homePage}>
+      <h1>Welcome to my kandi site!</h1>
+      <h2>
+        To get started,&nbsp;
+        <Link href="/new">create a pattern.</Link>
+      </h2>
+    </div>
+  );
 }
