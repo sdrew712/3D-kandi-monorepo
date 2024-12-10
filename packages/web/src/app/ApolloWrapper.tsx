@@ -7,9 +7,8 @@ import {
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
 import { useAuth } from "@/utils/useAuth";
-import Error from "next/error";
 
-function makeClient({ authToken }: { authToken: string }) {
+function makeClient({ authToken }: { authToken: string | null }) {
   //todo: make sure this works
   const env = process.env.NODE_ENV;
 
@@ -36,10 +35,6 @@ export function ApolloWrapper({ children }: React.PropsWithChildren) {
   const { authToken, loading } = useAuth();
 
   if (loading) return null;
-
-  if (!authToken) {
-    return <Error statusCode={404} />;
-  }
 
   return (
     <ApolloNextAppProvider makeClient={() => makeClient({ authToken })}>

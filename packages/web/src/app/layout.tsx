@@ -1,16 +1,22 @@
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ApolloWrapper } from "./ApolloWrapper";
 import ProtectedProvider from "@/components/ProtectedProvider";
 import TopNav from "../components/TopNav";
+import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "3D kandi patterns",
-  description: "Create and share 3D kandi patterns",
-};
+function isProtectedRoute() {
+  const pathname = usePathname();
+
+  const unprotectedRoutes = ["/signin", "/signup"];
+
+  if (unprotectedRoutes.includes(pathname)) return false;
+  return true;
+}
 
 export default function RootLayout({
   children,
@@ -21,10 +27,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ApolloWrapper>
-          <ProtectedProvider>
-            <TopNav />
-            {children}
-          </ProtectedProvider>
+          {isProtectedRoute() ? (
+            <ProtectedProvider>
+              <TopNav />
+              {children}
+            </ProtectedProvider>
+          ) : (
+            <>
+              <TopNav />
+              {children}
+            </>
+          )}
         </ApolloWrapper>
       </body>
     </html>
