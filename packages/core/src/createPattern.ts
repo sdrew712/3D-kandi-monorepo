@@ -12,7 +12,7 @@ export async function createPattern({
   title,
 }: {
   userId: string;
-  planes?: Plane[];
+  planes?: Omit<Plane, "id">[];
   title: string;
 }): Promise<DBPattern> {
   const newPattern: DBPattern = {
