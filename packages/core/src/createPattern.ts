@@ -18,8 +18,13 @@ export async function createPattern({
   const newPattern: DBPattern = {
     pk: `USER#${userId}`,
     sk: `PATTERN#${nanoid()}`,
-    planes: JSON.stringify(planes || []),
     title,
+    planes: JSON.stringify([
+      {
+        id: nanoid(),
+        beads: [],
+      },
+    ]),
   };
 
   try {

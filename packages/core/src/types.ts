@@ -6,6 +6,7 @@ export type Pattern = {
 };
 
 export type Plane = {
+  id: string;
   beads: Bead[];
 };
 
