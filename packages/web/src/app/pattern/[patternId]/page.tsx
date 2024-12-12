@@ -46,6 +46,7 @@ const GET_PATTERN = gql`
       id
       userId
       planes {
+        id
         beads {
           x
           y

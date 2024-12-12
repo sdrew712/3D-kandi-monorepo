@@ -14,9 +14,7 @@ export default function Patterns() {
 
   const patterns = (result.data as any).patterns as Pattern[];
 
-  if (!patterns || patterns.length === 0 || userLoading) {
-    return <div>Loading...</div>;
-  }
+  //todo: handle loading state
 
   if (!userId && !userLoading) {
     return <div>Not logged in.</div>;

@@ -17,6 +17,8 @@ class Bead {
 
 @ObjectType()
 export class Plane {
+  @Field((type) => String)
+  id: string;
   @Field((type) => [Bead])
   beads: Bead[];
 }

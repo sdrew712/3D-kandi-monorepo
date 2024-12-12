@@ -12,6 +12,7 @@ export async function createPattern({
   title,
 }: {
   userId: string;
+  //todo: use generated type
   planes?: Omit<Plane, "id">[];
   title: string;
 }): Promise<DBPattern> {
