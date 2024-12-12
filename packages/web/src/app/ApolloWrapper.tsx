@@ -11,9 +11,10 @@ import { useAuth } from "@/utils/useAuth";
 function makeClient({ authToken }: { authToken: string | null }) {
   const env = process.env.NODE_ENV;
 
-  let uri = "https://ykpfkfot1d.execute-api.us-west-2.amazonaws.com";
+  let uri = process.env.NEXT_PUBLIC_DEV_GRAPHQL_URL;
+
   if (env === "production") {
-    uri = "https://5kkazk3271.execute-api.us-west-2.amazonaws.com";
+    uri = process.env.NEXT_PUBLIC_PROD_GRAPHQL_URL;
   }
 
   const authLink = new HttpLink({
