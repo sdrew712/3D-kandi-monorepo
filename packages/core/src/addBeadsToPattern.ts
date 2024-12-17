@@ -25,7 +25,7 @@ export async function addBeadsToPattern({
   });
 
   if (!currentDBPattern) {
-    throw new Error("Error finding current pattern");
+    throw new Error("Error finding current pattern in addBeadsToPattern");
   }
 
   const currentPattern = mapDBPatternToPattern(currentDBPattern);
