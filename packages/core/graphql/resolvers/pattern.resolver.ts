@@ -13,6 +13,7 @@ import { Pattern } from "../types/pattern.type";
 import { getPattern } from "../../src/getPattern";
 import { getPatterns } from "../../src/getPatterns";
 import { createPattern } from "../../src/createPattern";
+import { addBeadsToPattern } from "../../src/addBeadsToPattern";
 import { mapDBPatternToPattern } from "../utils/mapDBPatternToPattern";
 import { type Context } from "../types/context.type";
 
@@ -76,6 +77,27 @@ export class PatternResolver {
       userId: ctx.userId,
       planes,
       title,
+    });
+
+    return mapDBPatternToPattern(newPattern);
+  }
+
+  @Mutation((_returns) => Pattern)
+  async addBeadsToPattern(
+    @Arg("beads", (_type) => [BeadInput])
+    beads: BeadInput[],
+    @Arg("patternId", (_type) => String)
+    patternId: string,
+    @Arg("planeId", (_type) => String)
+    planeId: string,
+    @Ctx()
+    ctx: Context
+  ): Promise<Pattern> {
+    const newPattern = await addBeadsToPattern({
+      userId: ctx.userId,
+      patternId,
+      planeId,
+      beads,
     });
 
     return mapDBPatternToPattern(newPattern);
