@@ -81,16 +81,6 @@ export function renderPattern(
                 />
               );
             }
-
-            return (
-              <Square
-                key={`${bead.x} ${bead.y} ${bead.z}`}
-                x={bead.x}
-                y={bead.y}
-                z={bead.z ?? 0}
-                color={bead.color}
-              />
-            );
           }
           return (
             <Square
