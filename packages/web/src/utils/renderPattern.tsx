@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 import Square from "../components/Square";
 import { Pattern } from "../../../core/src/types";
@@ -28,6 +28,7 @@ export function renderPattern(
     y: number | null;
     z: number | null;
   }>({ id: pattern.planes[0].id, x: null, y: null, z: 0 });
+  const [shouldUpdateSquare, setShouldUpdateSquare] = useState(false);
 
   const [addBeadsToPattern] = useMutation(ADD_BEADS_TO_PATTERN, {
     variables: {
@@ -47,6 +48,15 @@ export function renderPattern(
     },
   });
 
+  //using the shouldUpdateSquare value to only fire off the addBeadsToPattern mutation once.
+  //otherwise, it will happen like 13 times because of the
+  useEffect(() => {
+    if (shouldUpdateSquare) {
+      addBeadsToPattern();
+    }
+    setShouldUpdateSquare(false);
+  }, [shouldUpdateSquare]);
+
   let shouldDisplayPositionSquare = true;
 
   pattern.planes.forEach((plane) => {
@@ -63,9 +73,6 @@ export function renderPattern(
     <mesh
       layers={pattern.planes.length}
       onPointerMove={(e) => handleMouseMove({ e, setMousePosition })}
-      onClick={() => {
-        addBeadsToPattern();
-      }}
     >
       {pattern.planes.map((plane) =>
         plane.beads.map((bead) => {
@@ -78,6 +85,7 @@ export function renderPattern(
                   y={bead.y}
                   z={bead.z ?? 0}
                   color={changeColor(1, bead.color) || ""}
+                  setShouldUpdateSquare={setShouldUpdateSquare}
                 />
               );
             }
@@ -89,6 +97,7 @@ export function renderPattern(
               y={bead.y}
               z={bead.z ?? 0}
               color={bead.color}
+              setShouldUpdateSquare={setShouldUpdateSquare}
             />
           );
         })
@@ -109,6 +118,7 @@ export function renderPattern(
           y={currentPlane.y ?? mousePosition.y}
           z={currentPlane.z ?? mousePosition.z}
           color="#cbdcf7"
+          setShouldUpdateSquare={setShouldUpdateSquare}
         />
       )}
     </mesh>
