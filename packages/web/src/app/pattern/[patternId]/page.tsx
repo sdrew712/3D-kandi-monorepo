@@ -3,7 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { renderPattern } from "@/utils/renderPattern";
-import { useSuspenseQuery, gql } from "@apollo/client";
+import { useSuspenseQuery, gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { Pattern as PatternType } from "../../../../../core/src/types";
 import styles from "../../../page.module.css";
@@ -17,11 +17,25 @@ export default function Pattern() {
     },
   });
 
-  //todo: fix this type
-  const pattern = (result.data as any).pattern as PatternType;
+  const {
+    loading,
+    error,
+    data,
+    refetch: refetchPattern,
+  } = useQuery(GET_PATTERN, {
+    variables: {
+      patternId,
+    },
+  });
+
+  const pattern = data.pattern;
 
   if (!pattern) {
     return <div>Pattern not found.</div>;
+  }
+
+  if (loading) {
+    return <div>loading...</div>;
   }
 
   return (
@@ -34,7 +48,7 @@ export default function Pattern() {
         <OrbitControls />
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        {renderPattern(pattern)}
+        {renderPattern(pattern, refetchPattern)}
       </Canvas>
     </div>
   );

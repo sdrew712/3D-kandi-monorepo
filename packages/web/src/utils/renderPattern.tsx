@@ -3,22 +3,49 @@ import * as THREE from "three";
 import Square from "../components/Square";
 import { Pattern } from "../../../core/src/types";
 import { handleMouseMove } from "@/utils/handleMouseMove";
-import { useAddPatternSquare } from "@/utils/useAddPatternSquare";
 import { changeColor } from "@/utils/changeColor";
+import {
+  useMutation,
+  gql,
+  OperationVariables,
+  ApolloQueryResult,
+} from "@apollo/client";
 
-export function renderPattern(pattern: Pattern) {
-  const { addPatternSquare } = useAddPatternSquare({ pattern });
+export function renderPattern(
+  pattern: Pattern,
+  refetchPattern: (
+    variables?: Partial<OperationVariables> | undefined
+  ) => Promise<ApolloQueryResult<any>>
+) {
   const [mousePosition, setMousePosition] = useState<{
     x: number | null;
     y: number | null;
     z: number | null;
   }>({ x: null, y: null, z: null });
-
   const [currentPlane, setCurrentPlane] = useState<{
+    id: string;
     x: number | null;
     y: number | null;
     z: number | null;
-  }>({ x: null, y: null, z: 0 });
+  }>({ id: pattern.planes[0].id, x: null, y: null, z: 0 });
+
+  const [addBeadsToPattern] = useMutation(ADD_BEADS_TO_PATTERN, {
+    variables: {
+      patternId: pattern.id,
+      planeId: currentPlane.id,
+      beads: [
+        {
+          x: mousePosition.x,
+          y: mousePosition.y,
+          z: mousePosition.z,
+          color: "#3c32a8",
+        },
+      ],
+    },
+    onCompleted: () => {
+      refetchPattern();
+    },
+  });
 
   let shouldDisplayPositionSquare = true;
 
@@ -37,10 +64,7 @@ export function renderPattern(pattern: Pattern) {
       layers={pattern.planes.length}
       onPointerMove={(e) => handleMouseMove({ e, setMousePosition })}
       onClick={() => {
-        addPatternSquare({
-          coordinates: mousePosition,
-          color: "#3c32a8",
-        });
+        addBeadsToPattern();
       }}
     >
       {pattern.planes.map((plane) =>
@@ -100,3 +124,24 @@ export function renderPattern(pattern: Pattern) {
     </mesh>
   );
 }
+
+const ADD_BEADS_TO_PATTERN = gql`
+  mutation addBeadsToPattern(
+    $beads: [BeadInput!]!
+    $patternId: String!
+    $planeId: String!
+  ) {
+    addBeadsToPattern(beads: $beads, patternId: $patternId, planeId: $planeId) {
+      id
+      userId
+      planes {
+        beads {
+          x
+          y
+          z
+          color
+        }
+      }
+    }
+  }
+`;
