@@ -106,7 +106,7 @@ export class PatternResolver {
 
   @Mutation((_returns) => Pattern)
   async deletePattern(
-    @Arg("patternId", (_type) => String)
+    @Arg("patternId", (_type) => ID)
     patternId: string,
     @Ctx()
     ctx: Context
