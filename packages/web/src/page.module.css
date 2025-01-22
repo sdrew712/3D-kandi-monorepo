@@ -75,6 +75,21 @@
   cursor: pointer;
   color: white;
   background-color: pink;
+  position: relative;
+  &:hover {
+    background-color: #ff2e63;
+  }
+}
+
+.patternCard > .deleteIcon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #ff2e63;
+  border: 2px solid white;
+  &:hover {
+    background-color: pink;
+  }
 }
 
 #newPage,
