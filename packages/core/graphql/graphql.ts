@@ -14,9 +14,10 @@ import { getFirebaseUser } from "../src/firebase/getFirebaseUser";
 export async function createHandler() {
   const schema = await buildSchema({
     resolvers: [PatternResolver, UserResolver],
-    //only emit schema file in dev
     authChecker: customAuthChecker,
     authMode: "null",
+    //only emit schema file in dev
+    emitSchemaFile: "packages/core/graphql/schema.graphql",
   });
 
   const server = new ApolloServer<Context>({
@@ -34,6 +35,9 @@ export async function createHandler() {
         );
         return { userId, email };
       },
+      // context: async (req) => ({
+      //   authorization: req.event.headers.authorization,
+      // }),
     }
   );
 }
