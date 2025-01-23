@@ -128,8 +128,8 @@ export function renderPattern(
 const ADD_BEADS_TO_PATTERN = gql`
   mutation addBeadsToPattern(
     $beads: [BeadInput!]!
-    $patternId: String!
-    $planeId: String!
+    $patternId: ID!
+    $planeId: ID!
   ) {
     addBeadsToPattern(beads: $beads, patternId: $patternId, planeId: $planeId) {
       id
