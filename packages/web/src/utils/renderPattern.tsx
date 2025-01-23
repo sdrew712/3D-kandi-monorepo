@@ -129,7 +129,7 @@ const ADD_BEADS_TO_PATTERN = gql`
   mutation addBeadsToPattern(
     $beads: [BeadInput!]!
     $patternId: ID!
-    $planeId: ID!
+    $planeId: String!
   ) {
     addBeadsToPattern(beads: $beads, patternId: $patternId, planeId: $planeId) {
       id

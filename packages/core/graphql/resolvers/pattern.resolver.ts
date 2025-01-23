@@ -89,7 +89,7 @@ export class PatternResolver {
     beads: BeadInput[],
     @Arg("patternId", (_type) => ID)
     patternId: string,
-    @Arg("planeId", (_type) => ID)
+    @Arg("planeId", (_type) => String)
     planeId: string,
     @Ctx()
     ctx: Context
