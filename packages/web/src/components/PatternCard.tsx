@@ -18,13 +18,16 @@ export function PatternCard({ pattern }: { pattern: Pattern }) {
       onClick={() => router.push(`/pattern/${pattern.id}`)}
       className={styles.patternCard}
     >
-      <DeleteOutlineIcon
-        className={styles.deleteIcon}
-        onClick={(e: any) => {
-          e.stopPropagation();
-          deletePattern();
-        }}
-      />
+      <button className={styles.deleteIcon}>
+        <DeleteOutlineIcon
+          className={styles.deleteIcon}
+          fontSize="small"
+          onClick={(e: any) => {
+            e.stopPropagation();
+            deletePattern();
+          }}
+        />
+      </button>
 
       {pattern.title}
     </div>
