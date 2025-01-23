@@ -87,9 +87,9 @@ export class PatternResolver {
   async addBeadsToPattern(
     @Arg("beads", (_type) => [BeadInput])
     beads: BeadInput[],
-    @Arg("patternId", (_type) => String)
+    @Arg("patternId", (_type) => ID)
     patternId: string,
-    @Arg("planeId", (_type) => String)
+    @Arg("planeId", (_type) => ID)
     planeId: string,
     @Ctx()
     ctx: Context

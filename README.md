@@ -37,3 +37,8 @@ npx sst deploy --stage prod
 ```bash
 npx sst secrets set <NAME_OF_SECRET> "<VALUE_OF_SECRET>"
 ```
+
+## Generating types
+
+uncomment emitSchemaFile in packages/core/graphql/graphql.ts
+hit graph API
