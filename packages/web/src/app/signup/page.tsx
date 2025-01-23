@@ -14,6 +14,7 @@ function Page() {
     const { result, error } = await signUp({ email, password });
 
     if (error) {
+      //todo: error toast
       return console.log(error);
     }
 
