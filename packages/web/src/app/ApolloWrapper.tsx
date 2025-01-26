@@ -6,7 +6,7 @@ import {
   ApolloClient,
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
-import { useAuth } from "@/utils/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 
 function makeClient({ authToken }: { authToken: string | null }) {
   const env = process.env.NODE_ENV;

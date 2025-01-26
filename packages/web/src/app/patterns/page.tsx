@@ -1,7 +1,7 @@
 "use client";
 import { useSuspenseQuery, gql } from "@apollo/client";
 import { Pattern } from "../../../../core/src/types";
-import { useAuth } from "@/utils/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { PatternCard } from "@/components/PatternCard";
 import { useRouter } from "next/navigation";
 import styles from "../../page.module.css";

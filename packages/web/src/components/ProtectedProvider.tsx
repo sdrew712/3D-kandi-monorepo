@@ -1,7 +1,7 @@
 "use client";
 
 import Unauthenticated from "../components/Unauthenticated";
-import { useAuth } from "../utils/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import TopNav from "./TopNav";
 
 export default function ProtectedProvider({
