@@ -15,7 +15,8 @@ export function renderPattern(
   pattern: Pattern,
   refetchPattern: (
     variables?: Partial<OperationVariables> | undefined
-  ) => Promise<ApolloQueryResult<any>>
+  ) => Promise<ApolloQueryResult<any>>,
+  selectedColor: string
 ) {
   const [mousePosition, setMousePosition] = useState<{
     x: number | null;
@@ -39,7 +40,7 @@ export function renderPattern(
           x: mousePosition.x,
           y: mousePosition.y,
           z: mousePosition.z,
-          color: "#3c32a8",
+          color: selectedColor,
         },
       ],
     },

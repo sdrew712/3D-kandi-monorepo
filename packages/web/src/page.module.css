@@ -4,6 +4,10 @@
   width: 100vw;
 }
 
+.canvas {
+  /* z-index: 10; */
+}
+
 .arrowControls {
   display: flex;
   background: #ff2e63;
@@ -118,4 +122,11 @@
 #homePage a {
   color: blueviolet;
   text-decoration: underline;
+}
+
+.colorPicker {
+  position: absolute;
+  top: 64px;
+  left: 16px;
+  z-index: 1000;
 }
