@@ -11,6 +11,17 @@ export function PatternCard({ pattern }: { pattern: Pattern }) {
     variables: {
       patternId: pattern.id,
     },
+    update(cache) {
+      cache.modify({
+        fields: {
+          patterns(existingPatterns = [], { readField }) {
+            return existingPatterns.filter(
+              (patternRef: any) => pattern.id !== readField("id", patternRef)
+            );
+          },
+        },
+      });
+    },
   });
 
   return (

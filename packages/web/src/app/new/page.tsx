@@ -12,6 +12,15 @@ export default function New() {
     variables: {
       title,
     },
+    update(cache, { data }) {
+      cache.modify({
+        fields: {
+          patterns(existingPatterns = [], { readField }) {
+            return [...existingPatterns, data.createPattern];
+          },
+        },
+      });
+    },
   });
 
   return (
