@@ -8,7 +8,7 @@ import { useSuspenseQuery, gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { Pattern as PatternType } from "../../../../../core/src/types";
 import styles from "../../../page.module.css";
-import { SketchPicker } from "react-color";
+import { SketchPicker, ColorResult } from "react-color";
 
 export default function Pattern() {
   const { patternId } = useParams();
@@ -46,7 +46,7 @@ export default function Pattern() {
     <div className={styles.canvasContainer}>
       <SketchPicker
         className={styles.colorPicker}
-        onChange={(c) => {
+        onChange={(c: ColorResult) => {
           setSelectedColor(c.hex);
         }}
         color={selectedColor}

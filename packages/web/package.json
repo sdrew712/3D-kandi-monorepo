@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-color": "^3.0.13",
     "@types/react-dom": "^18",
     "@types/three": "^0.161.2",
     "aws-cdk-lib": "2.166.0",
