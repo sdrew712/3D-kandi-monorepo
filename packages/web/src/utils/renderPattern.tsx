@@ -44,6 +44,30 @@ export function renderPattern(
         },
       ],
     },
+    optimisticResponse: {
+      addBeadsToPattern: {
+        __typename: "Pattern",
+        id: pattern.id,
+        userId: pattern.userId,
+        planes: pattern.planes.map((plane) => ({
+          __typename: "Plane",
+          id: plane.id,
+          beads:
+            plane.id === currentPlane.id
+              ? [
+                  ...plane.beads,
+                  {
+                    __typename: "Bead",
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+                    z: mousePosition.z,
+                    color: selectedColor,
+                  },
+                ]
+              : plane.beads,
+        })),
+      },
+    },
     onCompleted: () => {
       refetchPattern();
     },
