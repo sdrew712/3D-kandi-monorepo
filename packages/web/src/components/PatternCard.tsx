@@ -24,6 +24,16 @@ export function PatternCard({ pattern }: { pattern: Pattern }) {
     },
   });
 
+  function handleClickDeletePattern(e: any) {
+    e.stopPropagation();
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this pattern?"
+    );
+    if (confirmed) {
+      deletePattern();
+    }
+  }
+
   return (
     <div
       onClick={() => router.push(`/pattern/${pattern.id}`)}
@@ -33,10 +43,7 @@ export function PatternCard({ pattern }: { pattern: Pattern }) {
         <DeleteOutlineIcon
           className={styles.deleteIcon}
           fontSize="small"
-          onClick={(e: any) => {
-            e.stopPropagation();
-            deletePattern();
-          }}
+          onClick={handleClickDeletePattern}
         />
       </button>
 
