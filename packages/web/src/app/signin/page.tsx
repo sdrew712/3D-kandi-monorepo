@@ -49,6 +49,16 @@ function Page() {
               placeholder="password"
             />
           </label>
+
+          <div className="forgot-password">
+            <button
+              type="button"
+              onClick={() => router.push("/forgot-password")}
+              className="forgot-password-button"
+            >
+              Forgot Password?
+            </button>
+          </div>
           <button type="submit">Sign in</button>
         </form>
       </div>

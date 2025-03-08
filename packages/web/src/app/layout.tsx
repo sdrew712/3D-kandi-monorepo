@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 function isProtectedRoute() {
   const pathname = usePathname();
 
-  const unprotectedRoutes = ["/signin", "/signup"];
+  const unprotectedRoutes = ["/signin", "/signup", "/forgot-password"];
 
   if (unprotectedRoutes.includes(pathname)) return false;
   return true;
