@@ -71,6 +71,9 @@ export function renderPattern(
     onCompleted: () => {
       refetchPattern();
     },
+    onError() {
+      alert("Something went wrong adding beads to your pattern :(");
+    },
   });
 
   //using the shouldUpdateSquare value to only fire off the addBeadsToPattern mutation once.

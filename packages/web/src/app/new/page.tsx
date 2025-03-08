@@ -21,6 +21,9 @@ export default function New() {
         },
       });
     },
+    onError() {
+      alert("Something went wrong creating your pattern :(");
+    },
   });
 
   return (

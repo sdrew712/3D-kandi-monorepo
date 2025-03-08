@@ -22,6 +22,9 @@ export function PatternCard({ pattern }: { pattern: Pattern }) {
         },
       });
     },
+    onError() {
+      alert("Something went wrong deleting your pattern :(");
+    },
   });
 
   function handleClickDeletePattern(e: any) {
