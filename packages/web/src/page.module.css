@@ -22,24 +22,32 @@
 }
 
 .topNav {
-  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 1rem 1rem;
   background: #ff2e63;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.topNav div {
+.topNav a {
   color: white;
-  cursor: pointer;
-  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.topNav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
 
 .centered {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 1.5rem;
 }
 
 .unauthenticated {
@@ -221,4 +229,19 @@
 
 .beadCount {
   font-weight: 500;
+}
+
+.topNav div[onClick] {
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  border: 2px solid white;
+  transition: all 0.2s ease;
+}
+
+.topNav div[onClick]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
