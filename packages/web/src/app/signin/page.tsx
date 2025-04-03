@@ -1,68 +1,65 @@
 "use client";
 
-import React from "react";
+import { useState } from "react";
 import signIn from "../../../../core/src/firebase/auth/signin";
+import styles from "../../page.module.css";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-function Page() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleForm: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
-    const { result, error } = await signIn({ email, password });
+    const { error } = await signIn({ email, password });
 
     if (error) {
       return console.log(error);
     }
 
-    // else successful
-    console.log(result);
     return router.push("/patterns");
   };
   return (
-    <div className="wrapper">
-      <div className="form-wrapper">
-        <h1>Sign in</h1>
-        <form onSubmit={handleForm} className="form">
-          <label htmlFor="email">
-            <p>Email</p>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              type="email"
-              name="email"
-              id="email"
-              placeholder="signin"
-            />
-          </label>
-          <label htmlFor="password">
-            <p>Password</p>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              type="password"
-              name="password"
-              id="password"
-              placeholder="password"
-            />
-          </label>
+    <div className={styles.authPage}>
+      <div className={styles.authContainer}>
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue creating patterns</p>
 
-          <div className="forgot-password">
-            <button
-              type="button"
-              onClick={() => router.push("/forgot-password")}
-              className="forgot-password-button"
-            >
-              Forgot Password?
-            </button>
+        <form className={styles.authForm} onSubmit={handleForm}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className={styles.authInput}
+          />
+          <div className={styles.passwordContainer}>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className={styles.authInput}
+            />
+            <Link href="/forgot-password" className={styles.forgotPassword}>
+              Forgot password?
+            </Link>
           </div>
-          <button type="submit">Sign in</button>
+          <button type="submit" className={styles.primaryButton}>
+            Sign in
+          </button>
         </form>
+
+        <p className={styles.authSwitch}>
+          Don't have an account?{" "}
+          <Link href="/signup" className={styles.authLink}>
+            Create one
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
-export default Page;
