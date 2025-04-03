@@ -1,57 +1,61 @@
 "use client";
-import React from "react";
+
+import { useState } from "react";
 import signUp from "../../../../core/src/firebase/auth/signup";
+import styles from "../../page.module.css";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-function Page() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleForm: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
-    const { result, error } = await signUp({ email, password });
+    const { error } = await signUp({ email, password });
 
     if (error) {
       //todo: error toast
-      return console.log(error);
     }
 
-    return router.push("/pattern");
+    return router.push("/patterns");
   };
+
   return (
-    <div className="wrapper">
-      <div className="form-wrapper">
-        <h1>Sign up</h1>
-        <form onSubmit={handleForm} className="form">
-          <label htmlFor="email">
-            <p>Email</p>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              type="email"
-              name="email"
-              id="email"
-              placeholder="example@mail.com"
-            />
-          </label>
-          <label htmlFor="password">
-            <p>Password</p>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              type="password"
-              name="password"
-              id="password"
-              placeholder="password"
-            />
-          </label>
-          <button type="submit">Sign up</button>
+    <div className={styles.authPage}>
+      <div className={styles.authContainer}>
+        <h1>Create Account</h1>
+        <p>Start creating your own patterns</p>
+
+        <form className={styles.authForm} onSubmit={handleForm}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className={styles.authInput}
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            className={styles.authInput}
+          />
+          <button type="submit" className={styles.primaryButton}>
+            Create account
+          </button>
         </form>
+
+        <p className={styles.authSwitch}>
+          Already have an account?{" "}
+          <Link href="/signin" className={styles.authLink}>
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
-
-export default Page;
