@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import { Pattern as PatternType } from "../../../../../core/src/types";
 import styles from "../../../page.module.css";
 import { SketchPicker, ColorResult } from "react-color";
+import { BeadCounter } from "@/components/BeadCounter";
 
 export default function Pattern() {
   const { patternId } = useParams();
@@ -44,13 +45,15 @@ export default function Pattern() {
 
   return (
     <div className={styles.canvasContainer}>
-      <SketchPicker
-        className={styles.colorPicker}
-        onChange={(c: ColorResult) => {
-          setSelectedColor(c.hex);
-        }}
-        color={selectedColor}
-      />
+      <div className={styles.sideContainer}>
+        <SketchPicker
+          onChange={(c: ColorResult) => {
+            setSelectedColor(c.hex);
+          }}
+          color={selectedColor}
+        />
+        <BeadCounter pattern={pattern} />
+      </div>
 
       <Canvas
         camera={{
