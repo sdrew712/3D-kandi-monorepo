@@ -1,14 +1,14 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../../core/src/firebase/config";
+import styles from "../../page.module.css";
+import Link from "next/link";
 
-function ForgotPassword() {
-  const [email, setEmail] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const router = useRouter();
+export default function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
     event
@@ -16,43 +16,52 @@ function ForgotPassword() {
     event.preventDefault();
     try {
       await sendPasswordResetEmail(auth, email);
-      setMessage("Password reset email sent! Check your inbox.");
-    } catch (error: any) {
-      setMessage(error.message || "An error occurred");
+      setEmailSent(true);
+    } catch (error) {
+      //todo: error toast
     }
   };
 
+  if (emailSent) {
+    return (
+      <div className={styles.authPage}>
+        <div className={styles.authContainer}>
+          <h1>Check Your Email</h1>
+          <p>We've sent password reset instructions to your email</p>
+          <Link href="/signin" className={styles.primaryButton}>
+            Return to Sign in
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="wrapper">
-      <div className="form-wrapper">
+    <div className={styles.authPage}>
+      <div className={styles.authContainer}>
         <h1>Reset Password</h1>
-        {message && <p className="message">{message}</p>}
-        <form onSubmit={handleSubmit} className="form">
-          <label htmlFor="email">
-            <p>Email</p>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter your email"
-            />
-          </label>
-          <div className="buttons">
-            <button type="submit">Send Reset Link</button>
-            <button
-              type="button"
-              onClick={() => router.push("/signin")}
-              className="secondary"
-            >
-              Back to Sign In
-            </button>
-          </div>
+        <p>Enter your email to receive reset instructions</p>
+
+        <form className={styles.authForm} onSubmit={handleSubmit}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className={styles.authInput}
+          />
+          <button type="submit" className={styles.primaryButton}>
+            Send Reset Link
+          </button>
         </form>
+
+        <p className={styles.authSwitch}>
+          Remember your password?{" "}
+          <Link href="/signin" className={styles.authLink}>
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
-
-export default ForgotPassword;
