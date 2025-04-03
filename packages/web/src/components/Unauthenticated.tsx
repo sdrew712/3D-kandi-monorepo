@@ -4,11 +4,16 @@ import styles from "../page.module.css";
 export default function Unauthenticated() {
   return (
     <div className={styles.unauthenticated}>
-      <h1>
-        Welcome to 3d kandi! Please sign in or make an account to continue.
-      </h1>
-      <Link href="/signin">Sign in</Link>
-      <Link href="/signup">Sign up</Link>
+      <h1>Welcome to 3D Kandi</h1>
+      <p>Create and share beautiful bead patterns</p>
+      <div className={styles.authButtons}>
+        <Link href="/signin" className={styles.primaryButton}>
+          Sign in
+        </Link>
+        <Link href="/signup" className={styles.secondaryButton}>
+          Create account
+        </Link>
+      </div>
     </div>
   );
 }
