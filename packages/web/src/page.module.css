@@ -86,6 +86,37 @@
   font-weight: 600;
   transition: all 0.2s ease;
   border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.primaryButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.primaryButton.loading {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ff2e63;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .primaryButton:hover {
@@ -284,6 +315,16 @@
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
+}
+
+.errorMessage {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .authInput {
