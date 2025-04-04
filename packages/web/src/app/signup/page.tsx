@@ -20,7 +20,7 @@ export default function SignUp() {
       //todo: error toast
     }
 
-    return router.push("/patterns");
+    return router.push("/");
   };
 
   return (

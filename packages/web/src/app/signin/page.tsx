@@ -20,7 +20,7 @@ export default function SignIn() {
       return console.log(error);
     }
 
-    return router.push("/patterns");
+    return router.push("/");
   };
   return (
     <div className={styles.authPage}>
