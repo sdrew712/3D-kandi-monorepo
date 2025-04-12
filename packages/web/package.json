@@ -21,7 +21,7 @@
     "@react-three/fiber": "^8.15.16",
     "firebase": "^10.13.2",
     "graphql": "^16.9.0",
-    "next": "14.2.13",
+    "next": "14.2.16",
     "react": "^18.3.1",
     "react-color": "^2.19.3",
     "react-dom": "^18",
