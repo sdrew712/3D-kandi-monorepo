@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "../page.module.css";
 import { Pattern } from "../../../core/src/types";
 
