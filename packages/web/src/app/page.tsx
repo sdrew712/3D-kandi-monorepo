@@ -33,7 +33,7 @@ function HomeContent() {
             Start Making
           </Link>
           <Link href="/patterns" className={styles.secondaryButton}>
-            Check Out Patterns
+            My Patterns
           </Link>
         </div>
       </div>

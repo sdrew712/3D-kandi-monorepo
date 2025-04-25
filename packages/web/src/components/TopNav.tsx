@@ -8,14 +8,21 @@ import { useAuth } from "../hooks/useAuth";
 export default function TopNav() {
   return (
     <nav className={styles.topNav}>
-      <div className={styles.centered}>
-        <Link href="/">Home</Link>
-
-        <Link href="/patterns">Patterns</Link>
-      </div>
-
+      {renderNavOptions()}
       {renderAuthOptions()}
     </nav>
+  );
+}
+
+function renderNavOptions() {
+  const { user } = useAuth();
+
+  return (
+    <div className={styles.centered}>
+      <Link href="/">Home</Link>
+
+      {user && <Link href="/patterns">Patterns</Link>}
+    </div>
   );
 }
 
@@ -23,7 +30,7 @@ function renderAuthOptions() {
   const { user } = useAuth();
 
   if (user) {
-    return <div onClick={signOut}>Sign out</div>;
+    return <a onClick={signOut}>Sign out</a>;
   }
 
   return (

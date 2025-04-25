@@ -27,6 +27,7 @@ npx sst deploy --region us-west-2 --stage prod
 ## Deploy graph
 
 comment out emitSchemaFile in packages/core/graphql/graphql.ts
+from root, run
 
 ```bash
 npx sst deploy --stage prod
