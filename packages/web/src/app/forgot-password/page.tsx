@@ -18,7 +18,7 @@ export default function ForgotPassword() {
       await sendPasswordResetEmail(auth, email);
       setEmailSent(true);
     } catch (error) {
-      //todo: error toast
+      alert("Something went wrong resetting your password :(");
     }
   };
 
