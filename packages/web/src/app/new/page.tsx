@@ -4,10 +4,13 @@ import styles from "../../page.module.css";
 import { useMutation, gql } from "@apollo/client";
 import { Pattern } from "@/__generated__/graphql";
 import { useRouter } from "next/navigation";
+import Button from "@/components/Button";
 
 export default function New() {
   const router = useRouter();
   const [title, setTitle] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const [createPattern] = useMutation(CREATE_PATTERN, {
     variables: {
       title,
@@ -23,6 +26,7 @@ export default function New() {
     },
     onError() {
       alert("Something went wrong creating your pattern :(");
+      setIsLoading(false);
     },
   });
 
@@ -32,10 +36,16 @@ export default function New() {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          const newPattern = (await createPattern()).data
-            .createPattern as Pattern;
+          setIsLoading(true);
 
-          router.push(`/pattern/${newPattern.id}`);
+          try {
+            const newPattern = (await createPattern()).data
+              .createPattern as Pattern;
+
+            router.push(`/pattern/${newPattern.id}`);
+          } catch (error) {
+            setIsLoading(false);
+          }
         }}
       >
         <label htmlFor="title">
@@ -47,9 +57,14 @@ export default function New() {
             name="title"
             id="title"
             placeholder="Cool title"
+            disabled={isLoading}
           />
         </label>
-        <button role="submit">Create</button>
+        <Button
+          text="Create"
+          isLoading={isLoading}
+          loadingText="Creating pattern..."
+        />
       </form>
     </div>
   );
