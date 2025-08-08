@@ -6,6 +6,7 @@ import styles from "../../page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
+import Page from "@/components/Page";
 
 export default function SignUp() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className={styles.authPage}>
+    <Page className={styles.authPageBg} title="Sign Up">
       <div className={styles.authContainer}>
         <h1>Create Account</h1>
         <p>Start creating your own patterns</p>
@@ -68,6 +69,6 @@ export default function SignUp() {
           </Link>
         </p>
       </div>
-    </div>
+    </Page>
   );
 }

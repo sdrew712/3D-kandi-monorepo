@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { PatternCard } from "@/components/PatternCard";
 import { useRouter } from "next/navigation";
 import styles from "../../page.module.css";
+import Page from "@/components/Page";
 
 export default function Patterns() {
   const { userId, loading: userLoading } = useAuth();
@@ -21,15 +22,21 @@ export default function Patterns() {
   }
 
   return (
-    <div id={styles.patternsPage}>
-      <h2>My Patterns</h2>
-      <button onClick={() => router.push("/new")}>+ Create Pattern</button>
-      <div>
+    <Page title="My Patterns">
+      <h2 className={styles.pageTitle}>My Patterns</h2>
+      <button
+        onClick={() => router.push("/new")}
+        className={styles.primaryButton}
+        style={{ marginBottom: "2rem" }}
+      >
+        + Create Pattern
+      </button>
+      <div className={styles.patternsGrid}>
         {patterns.map((pattern) => (
           <PatternCard key={pattern.id} pattern={pattern} />
         ))}
       </div>
-    </div>
+    </Page>
   );
 }
 

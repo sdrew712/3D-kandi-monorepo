@@ -5,6 +5,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../../core/src/firebase/config";
 import styles from "../../page.module.css";
 import Link from "next/link";
+import Page from "@/components/Page";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ export default function ForgotPassword() {
 
   if (emailSent) {
     return (
-      <div className={styles.authPage}>
+      <Page className={styles.authPageBg} title="Check Your Email">
         <div className={styles.authContainer}>
           <h1>Check Your Email</h1>
           <p>We've sent password reset instructions to your email</p>
@@ -32,12 +33,12 @@ export default function ForgotPassword() {
             Return to Sign in
           </Link>
         </div>
-      </div>
+      </Page>
     );
   }
 
   return (
-    <div className={styles.authPage}>
+    <Page className={styles.authPageBg} title="Reset Password">
       <div className={styles.authContainer}>
         <h1>Reset Password</h1>
         <p>Enter your email to receive reset instructions</p>
@@ -62,6 +63,6 @@ export default function ForgotPassword() {
           </Link>
         </p>
       </div>
-    </div>
+    </Page>
   );
 }

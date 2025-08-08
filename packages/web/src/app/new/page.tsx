@@ -5,6 +5,7 @@ import { useMutation, gql } from "@apollo/client";
 import { Pattern } from "@/__generated__/graphql";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
+import Page from "@/components/Page";
 
 export default function New() {
   const router = useRouter();
@@ -31,9 +32,10 @@ export default function New() {
   });
 
   return (
-    <div id={styles.newPage}>
-      <h2>Create Pattern</h2>
+    <Page title="Create Pattern">
+      <h2 className={styles.pageTitle}>Create Pattern</h2>
       <form
+        className={styles.pageForm}
         onSubmit={async (e) => {
           e.preventDefault();
           setIsLoading(true);
@@ -58,6 +60,7 @@ export default function New() {
             id="title"
             placeholder="Cool title"
             disabled={isLoading}
+            className={styles.pageInput}
           />
         </label>
         <Button
@@ -66,7 +69,7 @@ export default function New() {
           loadingText="Creating pattern..."
         />
       </form>
-    </div>
+    </Page>
   );
 }
 

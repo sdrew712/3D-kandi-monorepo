@@ -1,3 +1,19 @@
+/* Base Page Component Styles */
+.page {
+  height: calc(
+    100vh - 4rem
+  ); /* Subtract  navbar height (2rem padding + content) */
+  background: #ffffff;
+  color: #333;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  justify-content: center;
+}
+
 .canvasContainer {
   background: #ffffff;
   height: 100vh;
@@ -541,4 +557,76 @@
 .forgotPassword:hover {
   opacity: 1;
   text-decoration: underline;
+}
+
+/* Standardized Page Elements */
+.pageTitle {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: #ff2e63;
+}
+
+.pageForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  gap: 1.5rem;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pageInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  color: #333;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.pageInput:focus {
+  outline: none;
+  border-color: #ff2e63;
+  box-shadow: 0 0 0 2px rgba(255, 46, 99, 0.1);
+}
+
+.patternsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 1rem;
+}
+
+.homeContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5%;
+  height: 100%;
+  justify-content: center;
+}
+
+.authPageBg {
+  background: linear-gradient(135deg, #ff4d7e 0%, #ff9eb3 100%);
+  color: white;
+}
+
+.canvasPageContainer {
+  padding: 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  background: #ffffff;
+  height: 100%;
 }
