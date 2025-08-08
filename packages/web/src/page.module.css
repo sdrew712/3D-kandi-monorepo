@@ -203,6 +203,7 @@
 }
 
 .patternCard {
+  position: relative;
   background: #ffffff;
   padding: 2rem;
   border-radius: 16px;
