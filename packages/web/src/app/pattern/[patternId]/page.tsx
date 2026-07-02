@@ -14,7 +14,7 @@ import { Slider } from "@mui/material";
 
 export default function Pattern() {
   const { patternId } = useParams();
-  const [xAxis, setXAxis] = useState<number>(0);
+  const [horizontalSliderPos, setHorizontalSliderPos] = useState<number>(0);
 
   const [selectedColor, setSelectedColor] = useState<string>("");
 
@@ -51,8 +51,8 @@ export default function Pattern() {
         <Slider
           aria-label="Adjust x-axis"
           marks={true}
-          value={xAxis}
-          onChange={(e, value) => setXAxis(value as number)}
+          value={horizontalSliderPos}
+          onChange={(e, value) => setHorizontalSliderPos(value as number)}
           valueLabelDisplay="auto"
           color="primary"
           min={-50}
@@ -79,7 +79,12 @@ export default function Pattern() {
         <OrbitControls />
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        {renderPattern(pattern, refetchPattern, selectedColor)}
+        {renderPattern(
+          pattern,
+          refetchPattern,
+          selectedColor,
+          horizontalSliderPos,
+        )}
       </Canvas>
     </div>
   );

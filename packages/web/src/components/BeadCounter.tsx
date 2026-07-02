@@ -9,17 +9,18 @@ export function BeadCounter({ pattern }: { pattern: Pattern }) {
     count: number;
   }[] = pattern.planes
     ?.flatMap((plane) => plane.beads)
-    .reduce((acc, bead) => {
-      const existingBead = acc.find((b) => b.color === bead.color);
-      if (existingBead) {
-        existingBead.count++;
-      } else {
-        acc.push({ color: bead.color, count: 1 });
-      }
-      return acc;
-    }, [] as { color: string; count: number }[]);
-
-  console.log(beads);
+    .reduce(
+      (acc, bead) => {
+        const existingBead = acc.find((b) => b.color === bead.color);
+        if (existingBead) {
+          existingBead.count++;
+        } else {
+          acc.push({ color: bead.color, count: 1 });
+        }
+        return acc;
+      },
+      [] as { color: string; count: number }[],
+    );
 
   return (
     <div className={styles.beadCounter}>

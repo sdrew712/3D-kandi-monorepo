@@ -16,9 +16,10 @@ import {
 export function renderPattern(
   pattern: Pattern,
   refetchPattern: (
-    variables?: Partial<OperationVariables> | undefined
+    variables?: Partial<OperationVariables> | undefined,
   ) => Promise<ApolloQueryResult<any>>,
-  selectedColor: string
+  selectedColor: string,
+  horizontalSliderPos: number,
 ) {
   const [mousePosition, setMousePosition] = useState<{
     x: number | null;
@@ -92,7 +93,7 @@ export function renderPattern(
   pattern.planes.forEach((plane) => {
     if (
       plane.beads.some(
-        (bead) => bead.x === mousePosition.x && bead.y === mousePosition.y
+        (bead) => bead.x === mousePosition.x && bead.y === mousePosition.y,
       )
     ) {
       shouldDisplayPositionSquare = false;
@@ -130,18 +131,9 @@ export function renderPattern(
               setShouldUpdateSquare={setShouldUpdateSquare}
             />
           );
-        })
+        }),
       )}
-      <gridHelper
-        args={[50, 50, 0xff0000, "gray"]}
-        rotation={new THREE.Euler(Math.PI / 2, 0, 0)}
-        position={new THREE.Vector3(0.5, 0.5, 0.5)}
-      />
-      <gridHelper
-        args={[50, 50, 0xff0000, "gray"]}
-        rotation={new THREE.Euler(Math.PI / 2, 0, 0)}
-        position={new THREE.Vector3(0.5, 0.5, -0.5)}
-      />
+      <Grid horizontalSliderPos={horizontalSliderPos} />
       {shouldDisplayPositionSquare && (
         <Square
           x={currentPlane.x ?? mousePosition.x}
@@ -152,6 +144,54 @@ export function renderPattern(
         />
       )}
     </mesh>
+  );
+}
+
+function Grid({ horizontalSliderPos }: { horizontalSliderPos: number }) {
+  const grid1Positions = {
+    x: 0.5,
+    y: 0.5,
+    z: 0.5,
+  };
+
+  const grid2Positions = {
+    x: 0.5,
+    y: 0.5,
+    z: -0.5,
+  };
+
+  if (horizontalSliderPos !== 0) {
+    grid1Positions.z = 0.5 + horizontalSliderPos;
+    grid2Positions.z = -0.5 + horizontalSliderPos;
+  }
+
+  return (
+    <>
+      {/* grid1 */}
+      <gridHelper
+        args={[50, 50, 0xff0000, "gray"]}
+        rotation={new THREE.Euler(Math.PI / 2, 0, 0)}
+        position={
+          new THREE.Vector3(
+            grid1Positions.x,
+            grid1Positions.y,
+            grid1Positions.z,
+          )
+        }
+      />
+      {/* grid2 */}
+      <gridHelper
+        args={[50, 50, 0xff0000, "gray"]}
+        rotation={new THREE.Euler(Math.PI / 2, 0, 0)}
+        position={
+          new THREE.Vector3(
+            grid2Positions.x,
+            grid2Positions.y,
+            grid2Positions.z,
+          )
+        }
+      />
+    </>
   );
 }
 
