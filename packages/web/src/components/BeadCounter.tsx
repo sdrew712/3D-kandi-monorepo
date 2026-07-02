@@ -29,7 +29,7 @@ export function BeadCounter({ pattern }: { pattern: Pattern }) {
         {beads.map((bead) => (
           <div key={bead.color} className={styles.beadItem}>
             <div
-              className={styles.colorSquare}
+              className={styles.colorIcon}
               style={{ backgroundColor: bead.color }}
             />
             <div className={styles.beadCount}>{bead.count}</div>
