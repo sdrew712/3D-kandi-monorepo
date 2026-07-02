@@ -35,7 +35,9 @@ export function renderPattern(
   }>({ id: pattern.planes[0].id, x: null, y: null, z: 0 });
 
   useEffect(() => {
-    if (horizontalSliderPos !== 0) {
+    //updates the current plane data in respect to horizontal scroll
+    //this logic will need to be updated to support multi directional horizontal scroll
+    if (currentPlane.z !== horizontalSliderPos) {
       setCurrentPlane((plane) => ({
         id: plane.id,
         x: plane.x,

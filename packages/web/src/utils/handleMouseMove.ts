@@ -21,11 +21,9 @@ export function handleMouseMove({
     }>
   >;
 }) {
-  console.log(e);
   const intersects = e.intersections;
   intersects.forEach((intersection) => {
     const coords = intersection.point;
-
     const roundedCoords = {
       x: currentPlane.x
         ? currentPlane.x
