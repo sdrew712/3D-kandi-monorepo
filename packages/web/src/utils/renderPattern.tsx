@@ -26,12 +26,25 @@ export function renderPattern(
     y: number | null;
     z: number | null;
   }>({ x: null, y: null, z: null });
+
   const [currentPlane, setCurrentPlane] = useState<{
     id: string;
     x: number | null;
     y: number | null;
     z: number | null;
   }>({ id: pattern.planes[0].id, x: null, y: null, z: 0 });
+
+  useEffect(() => {
+    if (horizontalSliderPos !== 0) {
+      setCurrentPlane((plane) => ({
+        id: plane.id,
+        x: plane.x,
+        y: plane.y,
+        z: horizontalSliderPos,
+      }));
+    }
+  }, [horizontalSliderPos]);
+
   const [shouldUpdateSquare, setShouldUpdateSquare] = useState(false);
 
   const [addBeadsToPattern] = useMutation(ADD_BEADS_TO_PATTERN, {
@@ -103,7 +116,13 @@ export function renderPattern(
   return (
     <mesh
       layers={pattern.planes.length}
-      onPointerMove={(e) => handleMouseMove({ e, setMousePosition })}
+      onPointerMove={(e) =>
+        handleMouseMove({
+          e,
+          currentPlane,
+          setMousePosition,
+        })
+      }
     >
       {pattern.planes.map((plane) =>
         plane.beads.map((bead) => {
