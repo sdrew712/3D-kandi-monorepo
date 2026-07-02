@@ -401,7 +401,7 @@
   text-decoration: underline;
 }
 
-.sideContainer {
+.leftSideContainer {
   position: absolute;
   top: 100px;
   left: 16px;
@@ -412,7 +412,18 @@
   gap: 16px;
 }
 
-.beadCounter {
+.rightSideContainer {
+  position: absolute;
+  top: 100px;
+  right: 16px;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toolContainer {
   padding: 16px;
   border-radius: 8px;
   background-color: #ffffff;
@@ -420,12 +431,12 @@
   width: 220px;
 }
 
-.beadCounter h4 {
+.toolContainer h4 {
   color: black;
   font-weight: 400;
 }
 
-.beadCounter div {
+.toolContainer div {
   color: black;
   display: flex;
   gap: 10px;

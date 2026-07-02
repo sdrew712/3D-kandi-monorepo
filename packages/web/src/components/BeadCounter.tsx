@@ -23,7 +23,7 @@ export function BeadCounter({ pattern }: { pattern: Pattern }) {
     );
 
   return (
-    <div className={styles.beadCounter}>
+    <div className={styles.toolContainer}>
       <h4>Bead Counter</h4>
       <div className={styles.beadGrid}>
         {beads.map((bead) => (

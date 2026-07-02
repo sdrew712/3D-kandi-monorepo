@@ -10,11 +10,13 @@ import { Pattern as PatternType } from "../../../../../core/src/types";
 import styles from "../../../page.module.css";
 import { SketchPicker, ColorResult } from "react-color";
 import { BeadCounter } from "@/components/BeadCounter";
+import { RotateHorizontalSwitch } from "@/components/RotateHorizontalSwitch";
 import { Slider } from "@mui/material";
 
 export default function Pattern() {
   const { patternId } = useParams();
   const [horizontalSliderPos, setHorizontalSliderPos] = useState<number>(0);
+  const [isHorizontalModeToggled, setIsHorizontalModeToggled] = useState(false);
 
   const [selectedColor, setSelectedColor] = useState<string>("");
 
@@ -60,7 +62,7 @@ export default function Pattern() {
           step={1}
         />
       </div>
-      <div className={styles.sideContainer}>
+      <div className={styles.leftSideContainer}>
         <SketchPicker
           onChange={(c: ColorResult) => {
             setSelectedColor(c.hex);
@@ -68,6 +70,14 @@ export default function Pattern() {
           color={selectedColor}
         />
         <BeadCounter pattern={pattern} />
+      </div>
+      <div className={styles.rightSideContainer}>
+        <div className={styles.toolContainer}>
+          <RotateHorizontalSwitch
+            isToggled={isHorizontalModeToggled}
+            setIsToggled={setIsHorizontalModeToggled}
+          />
+        </div>
       </div>
       <Canvas
         camera={{
