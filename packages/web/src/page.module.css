@@ -20,6 +20,13 @@
   width: 100vw;
 }
 
+.topSliderContainer {
+  display: flex;
+  justify-content: center;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 .canvas {
   /* z-index: 10; */
 }
@@ -396,7 +403,7 @@
 
 .sideContainer {
   position: absolute;
-  top: 64px;
+  top: 100px;
   left: 16px;
   z-index: 1000;
 

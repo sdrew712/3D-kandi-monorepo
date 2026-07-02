@@ -10,9 +10,11 @@ import { Pattern as PatternType } from "../../../../../core/src/types";
 import styles from "../../../page.module.css";
 import { SketchPicker, ColorResult } from "react-color";
 import { BeadCounter } from "@/components/BeadCounter";
+import { Slider } from "@mui/material";
 
 export default function Pattern() {
   const { patternId } = useParams();
+  const [xAxis, setXAxis] = useState<number>(0);
 
   const [selectedColor, setSelectedColor] = useState<string>("");
 
@@ -45,6 +47,19 @@ export default function Pattern() {
 
   return (
     <div className={styles.canvasContainer}>
+      <div className={styles.topSliderContainer}>
+        <Slider
+          aria-label="Adjust x-axis"
+          marks={true}
+          value={xAxis}
+          onChange={(e, value) => setXAxis(value as number)}
+          valueLabelDisplay="auto"
+          color="primary"
+          min={-50}
+          max={50}
+          step={1}
+        />
+      </div>
       <div className={styles.sideContainer}>
         <SketchPicker
           onChange={(c: ColorResult) => {
@@ -54,9 +69,9 @@ export default function Pattern() {
         />
         <BeadCounter pattern={pattern} />
       </div>
-
       <Canvas
         camera={{
+          //change this when we orient axis
           position: [0, 0, 35],
         }}
         className={styles.canvas}
