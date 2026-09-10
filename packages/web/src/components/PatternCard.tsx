@@ -42,15 +42,16 @@ export function PatternCard({ pattern }: { pattern: Pattern }) {
       onClick={() => router.push(`/pattern/${pattern.id}`)}
       className={styles.patternCard}
     >
-      <button className={styles.deleteIcon}>
-        <DeleteOutlineIcon
-          className={styles.deleteIcon}
-          fontSize="small"
-          onClick={handleClickDeletePattern}
-        />
+      <button
+        className={styles.deleteIcon}
+        aria-label="Delete pattern"
+        onClick={handleClickDeletePattern}
+      >
+        <DeleteOutlineIcon fontSize="small" />
       </button>
-
-      {pattern.title}
+      <div className={styles.patternCardInner}>
+        <h3>{pattern.title}</h3>
+      </div>
     </div>
   );
 }

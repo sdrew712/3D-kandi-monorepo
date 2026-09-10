@@ -56,10 +56,37 @@ export default function Pattern() {
           value={horizontalSliderPos}
           onChange={(e, value) => setHorizontalSliderPos(value as number)}
           valueLabelDisplay="auto"
-          color="primary"
           min={-50}
           max={50}
           step={1}
+          sx={{
+            color: "var(--kandi-pink)",
+            "& .MuiSlider-thumb": {
+              borderRadius: 0,
+              width: 16,
+              height: 16,
+              backgroundColor: "var(--kandi-pink)",
+              border: "2px solid var(--kandi-ink)",
+              boxShadow: "none",
+              "&:hover, &.Mui-focusVisible": {
+                boxShadow: "0 0 0 8px rgba(255, 62, 136, 0.16)",
+              },
+            },
+            "& .MuiSlider-track": {
+              backgroundColor: "var(--kandi-pink)",
+              border: "none",
+              height: 4,
+            },
+            "& .MuiSlider-rail": {
+              backgroundColor: "var(--kandi-ink)",
+              opacity: 0.25,
+              height: 4,
+            },
+            "& .MuiSlider-mark": {
+              backgroundColor: "var(--kandi-ink)",
+              opacity: 0.4,
+            },
+          }}
         />
       </div>
       <div className={styles.leftSideContainer}>

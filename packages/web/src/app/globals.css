@@ -1,3 +1,79 @@
+/* ---------- tokens ---------- */
+:root {
+  --kandi-paper: #ede9dc;
+  --kandi-paper-raised: #fbf8ee;
+  --kandi-ink: #211a2e;
+  --kandi-pink: #ff3e88;
+  --kandi-lime: #b6ff3c;
+  --kandi-cyan: #34c6f4;
+  --kandi-violet: #8b4dff;
+  --kandi-sun: #ffc93c;
+  --kandi-line: rgba(33, 26, 46, 0.18);
+  --kandi-dot: rgba(33, 26, 46, 0.1);
+  --kandi-bead-ink: #211a2e;
+  --kandi-notch: 14px;
+  --kandi-notch-clip: polygon(
+    0 var(--kandi-notch),
+    var(--kandi-notch) var(--kandi-notch),
+    var(--kandi-notch) 0,
+    calc(100% - var(--kandi-notch)) 0,
+    calc(100% - var(--kandi-notch)) var(--kandi-notch),
+    100% var(--kandi-notch),
+    100% calc(100% - var(--kandi-notch)),
+    calc(100% - var(--kandi-notch)) calc(100% - var(--kandi-notch)),
+    calc(100% - var(--kandi-notch)) 100%,
+    var(--kandi-notch) 100%,
+    var(--kandi-notch) calc(100% - var(--kandi-notch)),
+    0 calc(100% - var(--kandi-notch))
+  );
+  --glow: 0 0 0 transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --kandi-paper: #160f22;
+    --kandi-paper-raised: #1f1832;
+    --kandi-ink: #f4efdf;
+    --kandi-pink: #ff5fa1;
+    --kandi-lime: #c6ff5c;
+    --kandi-cyan: #5ad8ff;
+    --kandi-violet: #a374ff;
+    --kandi-sun: #ffd666;
+    --kandi-line: rgba(244, 239, 223, 0.2);
+    --kandi-dot: rgba(244, 239, 223, 0.1);
+    --glow: 0 0 14px var(--bc, currentColor);
+  }
+}
+
+:root[data-theme="dark"] {
+  --kandi-paper: #160f22;
+  --kandi-paper-raised: #1f1832;
+  --kandi-ink: #f4efdf;
+  --kandi-pink: #ff5fa1;
+  --kandi-lime: #c6ff5c;
+  --kandi-cyan: #5ad8ff;
+  --kandi-violet: #a374ff;
+  --kandi-sun: #ffd666;
+  --kandi-line: rgba(244, 239, 223, 0.2);
+  --kandi-dot: rgba(244, 239, 223, 0.1);
+  --glow: 0 0 14px var(--bc, currentColor);
+}
+
+:root[data-theme="light"] {
+  --kandi-paper: #ede9dc;
+  --kandi-paper-raised: #fbf8ee;
+  --kandi-ink: #211a2e;
+  --kandi-pink: #ff3e88;
+  --kandi-lime: #b6ff3c;
+  --kandi-cyan: #34c6f4;
+  --kandi-violet: #8b4dff;
+  --kandi-sun: #ffc93c;
+  --kandi-line: rgba(33, 26, 46, 0.18);
+  --kandi-dot: rgba(33, 26, 46, 0.1);
+  --glow: 0 0 0 transparent;
+}
+
+/* ---------- reset ---------- */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -8,28 +84,45 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  color: #ff2e63;
-}
-
-h2 {
-  color: black;
 }
 
 body {
-  background: white;
+  background-color: var(--kandi-paper);
+  background-image: radial-gradient(var(--kandi-dot) 1.6px, transparent 1.7px);
+  background-size: 24px 24px;
+  color: var(--kandi-ink);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  line-height: 1.6;
+  transition: background-color 0.2s linear, color 0.2s linear;
+}
+
+::selection {
+  background: var(--kandi-pink);
+  color: var(--kandi-bead-ink);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  text-wrap: balance;
+  font-weight: 700;
 }
 
 a {
-  color: white;
+  color: inherit;
   text-decoration: none;
 }
 
 button {
-  background-color: #ff2e63;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 4px;
-  margin-bottom: 16px;
-  cursor: pointer;
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

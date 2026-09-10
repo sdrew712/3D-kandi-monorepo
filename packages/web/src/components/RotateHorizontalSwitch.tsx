@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import styles from "../page.module.css";
 
 export function RotateHorizontalSwitch({
@@ -10,17 +9,18 @@ export function RotateHorizontalSwitch({
   setIsToggled: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
-    
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={isToggled}
-              onChange={() => setIsToggled(!isToggled)}
-            />
-          }
-          label="Rotate Horizontally"
+    <label className={styles.switchRow}>
+      <span className={styles.switchLabel}>Rotate Horizontally</span>
+      <span className={styles.switch}>
+        <input
+          type="checkbox"
+          checked={isToggled}
+          onChange={() => setIsToggled(!isToggled)}
         />
-      </FormGroup>
+        <span className={styles.switchTrack} aria-hidden="true">
+          <span className={styles.switchThumb} />
+        </span>
+      </span>
+    </label>
   );
 }
