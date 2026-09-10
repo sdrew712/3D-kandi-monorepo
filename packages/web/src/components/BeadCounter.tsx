@@ -25,17 +25,24 @@ export function BeadCounter({ pattern }: { pattern: Pattern }) {
   return (
     <div className={styles.toolContainer}>
       <h4>Bead Counter</h4>
-      <div className={styles.beadGrid}>
-        {beads.map((bead) => (
-          <div key={bead.color} className={styles.beadItem}>
-            <div
-              className={styles.colorIcon}
-              style={{ backgroundColor: bead.color }}
-            />
-            <div className={styles.beadCount}>{bead.count}</div>
-          </div>
-        ))}
-      </div>
+      {beads.length === 0 ? (
+        <>
+          <p>nothing yet...</p>
+          <p>add a bead!</p>
+        </>
+      ) : (
+        <div className={styles.beadGrid}>
+          {beads.map((bead) => (
+            <div key={bead.color} className={styles.beadItem}>
+              <div
+                className={styles.colorIcon}
+                style={{ backgroundColor: bead.color }}
+              />
+              <div className={styles.beadCount}>{bead.count}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
