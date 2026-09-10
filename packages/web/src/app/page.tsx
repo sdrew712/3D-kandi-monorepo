@@ -27,8 +27,8 @@ function HomeContent() {
           <h1>3D Kandi Patterns</h1>
           <p className={styles.heroText}>
             Design your kandi in 3D and see exactly how it&apos;ll look before
-            you assemble a single bead. Spin it around, tweak the colors, make it
-            yours.
+            you assemble. Spin it around, change the colors, and count the beads
+            automatically!
           </p>
           <div className={styles.heroButtons}>
             <Link href="/new" className={styles.primaryButton}>
@@ -43,11 +43,16 @@ function HomeContent() {
         <div className={styles.featuresSection}>
           <div className={styles.feature}>
             <h3>See It in 3D</h3>
-            <p>Spin your pattern around before you start assembling — no more guessing how it&apos;ll look</p>
+            <p>
+              Spin your pattern around before you start assembling. No more
+              guessing how it&apos;ll look
+            </p>
           </div>
           <div className={styles.feature}>
             <h3>Share the Love</h3>
-            <p>Drop your patterns with friends or grab inspo from other makers</p>
+            <p>
+              Drop your patterns with friends or grab inspo from other makers
+            </p>
             <span className={styles.comingSoon}>Coming Soon</span>
           </div>
           <div className={styles.feature}>
