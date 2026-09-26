@@ -108,7 +108,10 @@ export function renderPattern(
   pattern.planes.forEach((plane) => {
     if (
       plane.beads.some(
-        (bead) => bead.x === mousePosition.x && bead.y === mousePosition.y,
+        (bead) =>
+          bead.x === mousePosition.x &&
+          bead.y === mousePosition.y &&
+          bead.z === mousePosition.z,
       )
     ) {
       shouldDisplayPositionSquare = false;
@@ -129,7 +132,11 @@ export function renderPattern(
       {pattern.planes.map((plane) =>
         plane.beads.map((bead) => {
           if (!shouldDisplayPositionSquare) {
-            if (bead.x === mousePosition.x && bead.y === mousePosition.y) {
+            if (
+              bead.x === mousePosition.x &&
+              bead.y === mousePosition.y &&
+              bead.z === mousePosition.z
+            ) {
               return (
                 <Square
                   key={`${bead.x} ${bead.y} ${bead.z}`}
