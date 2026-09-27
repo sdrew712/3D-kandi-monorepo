@@ -14,6 +14,7 @@ import { getPattern } from "../../src/getPattern";
 import { getPatterns } from "../../src/getPatterns";
 import { createPattern } from "../../src/createPattern";
 import { addBeadsToPattern } from "../../src/addBeadsToPattern";
+import { deleteBeadsFromPattern } from "../../src/deleteBeadsFromPattern";
 import { deletePattern } from "../../src/deletePattern";
 import { mapDBPatternToPattern } from "../utils/mapDBPatternToPattern";
 import { type Context } from "../types/context.type";
@@ -46,7 +47,7 @@ export class PatternResolver {
   async pattern(
     @Arg("id", (_type) => ID)
     id: string,
-    @Ctx() ctx: Context
+    @Ctx() ctx: Context,
   ) {
     const pattern = await getPattern({ id, userId: ctx.userId });
 
@@ -61,7 +62,7 @@ export class PatternResolver {
     if (!patterns) return null;
 
     const mappedPatterns = patterns.map((pattern) =>
-      mapDBPatternToPattern(pattern)
+      mapDBPatternToPattern(pattern),
     );
     return mappedPatterns;
   }
@@ -72,7 +73,7 @@ export class PatternResolver {
     planes: PlaneInput[],
     @Arg("title", (_type) => String)
     title: string,
-    @Ctx() ctx: Context
+    @Ctx() ctx: Context,
   ): Promise<Pattern> {
     const newPattern = await createPattern({
       userId: ctx.userId,
@@ -92,9 +93,30 @@ export class PatternResolver {
     @Arg("planeId", (_type) => String)
     planeId: string,
     @Ctx()
-    ctx: Context
+    ctx: Context,
   ): Promise<Pattern> {
     const newPattern = await addBeadsToPattern({
+      userId: ctx.userId,
+      patternId,
+      planeId,
+      beads,
+    });
+
+    return mapDBPatternToPattern(newPattern);
+  }
+
+  @Mutation((_returns) => Pattern)
+  async deleteBeadsFromPattern(
+    @Arg("beads", (_type) => [BeadInput])
+    beads: BeadInput[],
+    @Arg("patternId", (_type) => ID)
+    patternId: string,
+    @Arg("planeId", (_type) => String)
+    planeId: string,
+    @Ctx()
+    ctx: Context,
+  ): Promise<Pattern> {
+    const newPattern = await deleteBeadsFromPattern({
       userId: ctx.userId,
       patternId,
       planeId,
@@ -109,7 +131,7 @@ export class PatternResolver {
     @Arg("patternId", (_type) => ID)
     patternId: string,
     @Ctx()
-    ctx: Context
+    ctx: Context,
   ): Promise<Pattern> {
     const newPattern = await deletePattern({
       userId: ctx.userId,

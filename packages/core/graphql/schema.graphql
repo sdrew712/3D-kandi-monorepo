@@ -21,6 +21,7 @@ type Mutation {
   addBeadsToPattern(beads: [BeadInput!]!, patternId: ID!, planeId: String!): Pattern!
   createPattern(planes: [PlaneInput!], title: String!): Pattern!
   createUser(email: String!, password: String!, username: String!): User!
+  deleteBeadsFromPattern(beads: [BeadInput!]!, patternId: ID!, planeId: String!): Pattern!
   deletePattern(patternId: ID!): Pattern!
 }
 
