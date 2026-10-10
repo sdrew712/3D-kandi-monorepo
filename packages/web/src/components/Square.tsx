@@ -10,7 +10,6 @@ export default function Square({
   addBeadsToPattern,
   isDeleteModeToggled,
   deleteBeadsFromPattern,
-  userIsPanning,
 }: {
   x: number | null;
   y: number | null;
@@ -19,7 +18,6 @@ export default function Square({
   addBeadsToPattern: () => void;
   isDeleteModeToggled: boolean;
   deleteBeadsFromPattern: () => void;
-  userIsPanning: boolean;
 }) {
   if (x === null || y === null || z === null) return null;
 
@@ -31,7 +29,6 @@ export default function Square({
       onClick={async (e) => {
         //delete or add a bead based on mode selected
         e.stopPropagation();
-        if (userIsPanning) return;
 
         if (isDeleteModeToggled) {
           await deleteBeadsFromPattern();

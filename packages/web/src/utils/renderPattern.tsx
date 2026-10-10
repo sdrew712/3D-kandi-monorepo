@@ -21,7 +21,6 @@ export function renderPattern(
   selectedColor: string,
   horizontalSliderPos: number,
   isDeleteModeToggled: boolean,
-  userIsPanning: boolean,
   isGridHidden: boolean,
 ) {
   const [mousePosition, setMousePosition] = useState<{
@@ -139,7 +138,7 @@ export function renderPattern(
     },
   });
 
-  let shouldDisplayPositionSquare = userIsPanning ? false : true;
+  let shouldDisplayPositionSquare = true;
 
   pattern.planes.forEach((plane) => {
     if (
@@ -183,7 +182,6 @@ export function renderPattern(
                   addBeadsToPattern={addBeadsToPattern}
                   isDeleteModeToggled={isDeleteModeToggled}
                   deleteBeadsFromPattern={deleteBeadsFromPattern}
-                  userIsPanning={userIsPanning}
                 />
               );
             }
@@ -198,7 +196,6 @@ export function renderPattern(
               addBeadsToPattern={addBeadsToPattern}
               isDeleteModeToggled={isDeleteModeToggled}
               deleteBeadsFromPattern={deleteBeadsFromPattern}
-              userIsPanning={userIsPanning}
             />
           );
         }),
@@ -213,7 +210,6 @@ export function renderPattern(
           addBeadsToPattern={addBeadsToPattern}
           isDeleteModeToggled={isDeleteModeToggled}
           deleteBeadsFromPattern={deleteBeadsFromPattern}
-          userIsPanning={userIsPanning}
         />
       )}
     </mesh>
