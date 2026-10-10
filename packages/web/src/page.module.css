@@ -164,7 +164,9 @@
   border: 3px solid var(--kandi-ink);
   box-shadow: 4px 4px 0 var(--kandi-ink);
   cursor: pointer;
-  transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
+  transition:
+    transform 0.1s steps(2),
+    box-shadow 0.1s steps(2);
 }
 
 .primaryButton {
@@ -426,7 +428,9 @@
   width: 1.05rem;
   height: 1.05rem;
   background: var(--kandi-ink);
-  transition: transform 0.12s steps(3), background-color 0.12s linear;
+  transition:
+    transform 0.12s steps(3),
+    background-color 0.12s linear;
 }
 
 .switch input:checked ~ .switchTrack {
@@ -467,7 +471,9 @@
   border: 2px solid var(--kandi-ink);
   box-shadow: 3px 3px 0 var(--kandi-ink);
   cursor: pointer;
-  transition: transform 0.1s steps(2), box-shadow 0.1s steps(2),
+  transition:
+    transform 0.1s steps(2),
+    box-shadow 0.1s steps(2),
     background-color 0.1s linear;
 }
 
@@ -491,6 +497,16 @@
   color: var(--kandi-bead-ink);
   transform: translate(3px, 3px);
   box-shadow: var(--glow);
+}
+
+.hideGridTool[aria-pressed="true"] {
+  background: var(--kandi-cyan);
+}
+
+.hideGridSlash {
+  fill: var(--kandi-pink);
+  stroke: var(--kandi-ink);
+  stroke-width: 0.5;
 }
 
 .toolIcon {

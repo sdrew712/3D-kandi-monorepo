@@ -22,6 +22,7 @@ export function renderPattern(
   horizontalSliderPos: number,
   isDeleteModeToggled: boolean,
   userIsPanning: boolean,
+  isGridHidden: boolean,
 ) {
   const [mousePosition, setMousePosition] = useState<{
     x: number | null;
@@ -202,7 +203,7 @@ export function renderPattern(
           );
         }),
       )}
-      <Grid horizontalSliderPos={horizontalSliderPos} />
+      {!isGridHidden && <Grid horizontalSliderPos={horizontalSliderPos} />}
       {shouldDisplayPositionSquare && (
         <Square
           x={currentPlane.x ?? mousePosition.x}

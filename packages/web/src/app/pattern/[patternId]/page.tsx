@@ -12,6 +12,7 @@ import { SketchPicker, ColorResult } from "react-color";
 import { BeadCounter } from "@/components/BeadCounter";
 import { RotateHorizontalSwitch } from "@/components/RotateHorizontalSwitch";
 import { DeleteTool } from "@/components/DeleteTool";
+import { HideGridTool } from "@/components/HideGridTool";
 import { Slider } from "@mui/material";
 
 export default function Pattern() {
@@ -20,6 +21,7 @@ export default function Pattern() {
   const [isHorizontalModeToggled, setIsHorizontalModeToggled] = useState(false);
   const [isDeleteModeToggled, setIsDeleteModeToggled] = useState(false);
   const [userIsPanning, setUserIsPanning] = useState(false);
+  const [isGridHidden, setIsGridHidden] = useState(false);
 
   const [selectedColor, setSelectedColor] = useState<string>("");
 
@@ -112,6 +114,10 @@ export default function Pattern() {
             isToggled={isDeleteModeToggled}
             setIsToggled={setIsDeleteModeToggled}
           />
+          <HideGridTool
+            isToggled={isGridHidden}
+            setIsToggled={setIsGridHidden}
+          />
         </div>
       </div>
       <Canvas
@@ -134,6 +140,7 @@ export default function Pattern() {
           horizontalSliderPos,
           isDeleteModeToggled,
           userIsPanning,
+          isGridHidden,
         )}
       </Canvas>
     </div>
