@@ -48,8 +48,6 @@ export function renderPattern(
     }
   }, [horizontalSliderPos]);
 
-  const [shouldUpdateSquare, setShouldUpdateSquare] = useState(false);
-
   const [addBeadsToPattern] = useMutation(ADD_BEADS_TO_PATTERN, {
     variables: {
       patternId: pattern.id,
@@ -139,15 +137,6 @@ export function renderPattern(
     },
   });
 
-  //using the shouldUpdateSquare value to only fire off the addBeadsToPattern mutation once.
-  //otherwise, it will happen like 13 times because of the
-  useEffect(() => {
-    if (shouldUpdateSquare && !isDeleteModeToggled) {
-      addBeadsToPattern();
-    }
-    setShouldUpdateSquare(false);
-  }, [shouldUpdateSquare]);
-
   let shouldDisplayPositionSquare = true;
 
   pattern.planes.forEach((plane) => {
@@ -189,7 +178,7 @@ export function renderPattern(
                   y={bead.y}
                   z={bead.z ?? 0}
                   color={changeColor(1, bead.color) || ""}
-                  setShouldUpdateSquare={setShouldUpdateSquare}
+                  addBeadsToPattern={addBeadsToPattern}
                   isDeleteModeToggled={isDeleteModeToggled}
                   deleteBeadsFromPattern={deleteBeadsFromPattern}
                 />
@@ -203,7 +192,7 @@ export function renderPattern(
               y={bead.y}
               z={bead.z ?? 0}
               color={bead.color}
-              setShouldUpdateSquare={setShouldUpdateSquare}
+              addBeadsToPattern={addBeadsToPattern}
               isDeleteModeToggled={isDeleteModeToggled}
               deleteBeadsFromPattern={deleteBeadsFromPattern}
             />
@@ -217,7 +206,7 @@ export function renderPattern(
           y={currentPlane.y ?? mousePosition.y}
           z={currentPlane.z ?? mousePosition.z}
           color="#cbdcf7"
-          setShouldUpdateSquare={setShouldUpdateSquare}
+          addBeadsToPattern={addBeadsToPattern}
           isDeleteModeToggled={isDeleteModeToggled}
           deleteBeadsFromPattern={deleteBeadsFromPattern}
         />

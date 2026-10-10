@@ -1,6 +1,5 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
 import * as THREE from "three";
 
 export default function Square({
@@ -8,7 +7,7 @@ export default function Square({
   y,
   z = 0,
   color,
-  setShouldUpdateSquare,
+  addBeadsToPattern,
   isDeleteModeToggled,
   deleteBeadsFromPattern,
 }: {
@@ -16,7 +15,7 @@ export default function Square({
   y: number | null;
   z: number | null;
   color: string;
-  setShouldUpdateSquare: Dispatch<SetStateAction<boolean>>;
+  addBeadsToPattern: () => void;
   isDeleteModeToggled: boolean;
   deleteBeadsFromPattern: () => void;
 }) {
@@ -32,7 +31,7 @@ export default function Square({
         if (isDeleteModeToggled) {
           await deleteBeadsFromPattern();
         } else {
-          setShouldUpdateSquare(true);
+          addBeadsToPattern();
         }
       }}
     >
