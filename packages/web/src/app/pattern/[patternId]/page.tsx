@@ -11,12 +11,14 @@ import styles from "../../../page.module.css";
 import { SketchPicker, ColorResult } from "react-color";
 import { BeadCounter } from "@/components/BeadCounter";
 import { RotateHorizontalSwitch } from "@/components/RotateHorizontalSwitch";
+import { DeleteTool } from "@/components/DeleteTool";
 import { Slider } from "@mui/material";
 
 export default function Pattern() {
   const { patternId } = useParams();
   const [horizontalSliderPos, setHorizontalSliderPos] = useState<number>(0);
   const [isHorizontalModeToggled, setIsHorizontalModeToggled] = useState(false);
+  const [isDeleteModeToggled, setIsDeleteModeToggled] = useState(false);
 
   const [selectedColor, setSelectedColor] = useState<string>("");
 
@@ -104,6 +106,11 @@ export default function Pattern() {
             isToggled={isHorizontalModeToggled}
             setIsToggled={setIsHorizontalModeToggled}
           />
+          <hr className={styles.toolDivider} />
+          <DeleteTool
+            isToggled={isDeleteModeToggled}
+            setIsToggled={setIsDeleteModeToggled}
+          />
         </div>
       </div>
       <Canvas
@@ -121,6 +128,7 @@ export default function Pattern() {
           refetchPattern,
           selectedColor,
           horizontalSliderPos,
+          isDeleteModeToggled,
         )}
       </Canvas>
     </div>

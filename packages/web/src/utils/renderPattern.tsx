@@ -20,6 +20,7 @@ export function renderPattern(
   ) => Promise<ApolloQueryResult<any>>,
   selectedColor: string,
   horizontalSliderPos: number,
+  isDeleteModeToggled: boolean,
 ) {
   const [mousePosition, setMousePosition] = useState<{
     x: number | null;
@@ -89,15 +90,59 @@ export function renderPattern(
     onCompleted: () => {
       refetchPattern();
     },
-    onError() {
+    onError(err) {
+      console.log(err);
       alert("Something went wrong adding beads to your pattern :(");
+    },
+  });
+
+  const [deleteBeadsFromPattern] = useMutation(DELETE_BEADS_FROM_PATTERN, {
+    variables: {
+      patternId: pattern.id,
+      planeId: currentPlane.id,
+      beads: [
+        {
+          x: mousePosition.x,
+          y: mousePosition.y,
+          z: mousePosition.z,
+          color: selectedColor,
+        },
+      ],
+    },
+    optimisticResponse: {
+      deleteBeadsFromPattern: {
+        __typename: "Pattern",
+        id: pattern.id,
+        userId: pattern.userId,
+        planes: pattern.planes.map((plane) => ({
+          __typename: "Plane",
+          id: plane.id,
+          beads:
+            plane.id === currentPlane.id
+              ? plane.beads.filter(
+                  (bead) =>
+                    !(
+                      bead.x === mousePosition.x &&
+                      bead.y === mousePosition.y &&
+                      (bead.z ?? 0) === (mousePosition.z ?? 0)
+                    ),
+                )
+              : plane.beads,
+        })),
+      },
+    },
+    onCompleted: () => {
+      refetchPattern();
+    },
+    onError() {
+      alert("Something went wrong deleting beads from your pattern :(");
     },
   });
 
   //using the shouldUpdateSquare value to only fire off the addBeadsToPattern mutation once.
   //otherwise, it will happen like 13 times because of the
   useEffect(() => {
-    if (shouldUpdateSquare) {
+    if (shouldUpdateSquare && !isDeleteModeToggled) {
       addBeadsToPattern();
     }
     setShouldUpdateSquare(false);
@@ -145,6 +190,8 @@ export function renderPattern(
                   z={bead.z ?? 0}
                   color={changeColor(1, bead.color) || ""}
                   setShouldUpdateSquare={setShouldUpdateSquare}
+                  isDeleteModeToggled={isDeleteModeToggled}
+                  deleteBeadsFromPattern={deleteBeadsFromPattern}
                 />
               );
             }
@@ -157,6 +204,8 @@ export function renderPattern(
               z={bead.z ?? 0}
               color={bead.color}
               setShouldUpdateSquare={setShouldUpdateSquare}
+              isDeleteModeToggled={isDeleteModeToggled}
+              deleteBeadsFromPattern={deleteBeadsFromPattern}
             />
           );
         }),
@@ -169,6 +218,8 @@ export function renderPattern(
           z={currentPlane.z ?? mousePosition.z}
           color="#cbdcf7"
           setShouldUpdateSquare={setShouldUpdateSquare}
+          isDeleteModeToggled={isDeleteModeToggled}
+          deleteBeadsFromPattern={deleteBeadsFromPattern}
         />
       )}
     </mesh>
@@ -230,6 +281,31 @@ const ADD_BEADS_TO_PATTERN = gql`
     $planeId: String!
   ) {
     addBeadsToPattern(beads: $beads, patternId: $patternId, planeId: $planeId) {
+      id
+      userId
+      planes {
+        beads {
+          x
+          y
+          z
+          color
+        }
+      }
+    }
+  }
+`;
+
+const DELETE_BEADS_FROM_PATTERN = gql`
+  mutation deleteBeadsFromPattern(
+    $beads: [BeadInput!]!
+    $patternId: ID!
+    $planeId: String!
+  ) {
+    deleteBeadsFromPattern(
+      beads: $beads
+      patternId: $patternId
+      planeId: $planeId
+    ) {
       id
       userId
       planes {

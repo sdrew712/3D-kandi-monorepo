@@ -443,6 +443,69 @@
   outline-offset: 2px;
 }
 
+/* ---------- tool button ---------- */
+.toolDivider {
+  border: none;
+  border-top: 2px dashed var(--kandi-line);
+  margin: 14px 0;
+}
+
+.toolButton {
+  --bc: var(--kandi-pink);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--kandi-ink);
+  background: var(--kandi-paper);
+  border: 2px solid var(--kandi-ink);
+  box-shadow: 3px 3px 0 var(--kandi-ink);
+  cursor: pointer;
+  transition: transform 0.1s steps(2), box-shadow 0.1s steps(2),
+    background-color 0.1s linear;
+}
+
+.toolButton:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--kandi-ink);
+}
+
+.toolButton:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--kandi-ink);
+}
+
+.toolButton:focus-visible {
+  outline: 2px solid var(--kandi-cyan);
+  outline-offset: 2px;
+}
+
+.toolButton[aria-pressed="true"] {
+  background: var(--kandi-pink);
+  color: var(--kandi-bead-ink);
+  transform: translate(3px, 3px);
+  box-shadow: var(--glow);
+}
+
+.toolIcon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.toolState {
+  margin-left: auto;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.65rem;
+  border: 2px solid currentColor;
+}
+
 /* ---------- home ---------- */
 .homeContent {
   display: flex;
