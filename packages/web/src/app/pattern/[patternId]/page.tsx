@@ -19,6 +19,7 @@ export default function Pattern() {
   const [horizontalSliderPos, setHorizontalSliderPos] = useState<number>(0);
   const [isHorizontalModeToggled, setIsHorizontalModeToggled] = useState(false);
   const [isDeleteModeToggled, setIsDeleteModeToggled] = useState(false);
+  const [userIsPanning, setUserIsPanning] = useState(false);
 
   const [selectedColor, setSelectedColor] = useState<string>("");
 
@@ -120,7 +121,10 @@ export default function Pattern() {
         }}
         className={styles.canvas}
       >
-        <OrbitControls />
+        <OrbitControls
+          onStart={() => setUserIsPanning(true)}
+          onEnd={() => setUserIsPanning(false)}
+        />
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         {renderPattern(
@@ -129,6 +133,7 @@ export default function Pattern() {
           selectedColor,
           horizontalSliderPos,
           isDeleteModeToggled,
+          userIsPanning,
         )}
       </Canvas>
     </div>
