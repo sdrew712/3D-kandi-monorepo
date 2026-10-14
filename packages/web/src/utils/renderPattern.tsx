@@ -138,7 +138,7 @@ export function renderPattern(
     },
   });
 
-  let shouldDisplayPositionSquare = true;
+  let shouldDisplayPositionSquare = isGridHidden ? false : true;
 
   pattern.planes.forEach((plane) => {
     if (
