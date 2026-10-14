@@ -166,7 +166,7 @@ export function renderPattern(
     >
       {pattern.planes.map((plane) =>
         plane.beads.map((bead) => {
-          if (!shouldDisplayPositionSquare) {
+          if (!shouldDisplayPositionSquare && !isGridHidden) {
             if (
               bead.x === mousePosition.x &&
               bead.y === mousePosition.y &&
