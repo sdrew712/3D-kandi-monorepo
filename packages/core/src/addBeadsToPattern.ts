@@ -35,9 +35,32 @@ export async function addBeadsToPattern({
     planes: [
       ...currentPattern.planes.map((plane) => {
         if (plane.id === planeId) {
+          // we cannot have 2 beads in 1 spot (matching x, y, z)
+          // if we are trying to overwrite a bead, we should replace it with the new one and its new color.
+          const prevBeads = plane.beads;
+
+          const newBeads = beads;
+
+          const prevBeadsWithDupesRemoved = prevBeads.filter((bead) => {
+            const foundPreexisting = newBeads.find(
+              (element) =>
+                element.x === bead.x &&
+                element.y === bead.y &&
+                element.z === bead.z,
+            );
+
+            if (foundPreexisting) {
+              return false;
+            } else {
+              return true;
+            }
+          });
+
+          const newConstructedBeads = [...prevBeadsWithDupesRemoved, ...beads];
+
           return {
             ...plane,
-            beads: [...plane.beads, ...beads],
+            beads: newConstructedBeads,
           };
         }
         return plane;
